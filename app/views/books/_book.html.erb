@@ -1,12 +1,17 @@
-<div id="<%= dom_id book %>">
-  <p>
-    <strong>Title:</strong>
-    <%= book.title %>
-  </p>
 
-  <p>
-    <strong>Discription:</strong>
-    <%= book.discription %>
-  </p>
+  <div id="<%= dom_id book %>">
+    <p>
+      <strong>Title:</strong>
+      <%= book.title %>
+    </p>
 
-</div>
+    <p>
+      <strong>Discription:</strong>
+      <%= book.discription %>
+    </p>
+
+    <% if book.cover.attached? %>
+    <p><%= image_tag(book.cover, style:"width: 500px;") %></p>
+  <% end %>
+
+

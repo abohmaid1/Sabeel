@@ -1,0 +1,25 @@
+
+<style>
+    img{
+        max-width: 5rem;
+    }
+
+</style>
+<% if books != [] %>
+<% @books.each do |book| %>
+    <div class="container">    
+        <%= book.title  %>
+        ,
+        <%= book.authors  %>
+        ,
+        <% if book.image_link.present? %>
+            <%= image_tag(book.image_link) %>
+        <% end %>
+    </div>
+    <hr>
+<% end %>
+<% else %>
+    <div class="container">
+        No Results
+    </div>
+<% end %>

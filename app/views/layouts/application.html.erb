@@ -11,7 +11,8 @@
   </head>
 
   <body>
-    <% if current_user %>
+      <%= turbo_frame_tag "modal" %>
+       <% if current_user %>
       <%= current_user.username %>
       <%= link_to "Sign out", destroy_user_session_path, data: {
         turbo_method: :delete,
