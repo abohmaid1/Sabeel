@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :books, :except => [:index, :delete] do
     collection do
       post :search
+      post :add_book_to_user
+      delete :remove_book_from_user
     end
   end
   get 'library', :to => 'books#index'

@@ -23,6 +23,7 @@ class BooksController < ApplicationController
   end
 
   # POST /books or /books.json
+
   def create
     @book = Book.new(book_params)
     @book.user_ids = current_user.id
@@ -55,35 +56,50 @@ class BooksController < ApplicationController
   end
 
   # DELETE /books/1 or /books/1.json
-  def destroy
-    @book.destroy
-    respond_to do |format|
-      format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  
 
 
   def search
     if params[:title_search].present?
-      @books = GoogleBooks.search(params[:title_search])
-      
+      @google_Books = GoogleBooks.search(params[:title_search])
+      @local_Books = Book.filter_by_title(params[:title_search])
     else
-      @books = []
+      @google_Books = []
+      @local_Books = []
     end
     
     respond_to do |format|
     format.turbo_stream do
         render turbo_stream: turbo_stream.update("search_results", 
-          partial: "books/search_results", locals: {books: @books})
+          partial: "books/search_results", locals: {google_Books: @google_Books, local_Books: @local_Books})
       end
     end 
   end
 
+  def remove_book_from_user
+    respond_to do |format|
+      if current_user.books.delete(Book.find(params[:id]))
+        format.html { redirect_to library_url, notice: "Book removed" }
+        format.json { render :library, status: :ok}
+      else
+        format.html { render :library, status: :unprocessable_entity }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-
-
-
+  def add_book_to_user
+    @book = set_book
+    @check = UserHaveBook.where(user_id: current_user, book_id: @book.id)
+    respond_to do |format|
+      if @check.blank?
+        @book.users << current_user
+        format.html { redirect_to library_url, notice: "Book Added" }
+      else
+        format.html { redirect_to library_url, alert: "Book Already in your library" }
+      end
+    end
+  end
 
 
   private

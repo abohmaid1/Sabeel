@@ -1,14 +1,41 @@
 
 <style>
     img{
-        max-width: 5rem;
+        max-width: 2rem;
     }
 
 </style>
-<% if books != [] %>
-<% @books.each do |book| %>
+
+<!-- Show local database Results  -->
+
+<h2>Results found in our database</h2>
+<% if @local_Books != [] %>
+<% @local_Books.each do |book| %>
     <div class="container">    
-        <%= book.title  %>
+        <%= book.title %>
+        ,
+        <% if book.cover.attached? %>
+            <p><%= image_tag(book.cover) %></p>
+        <% end %>     
+        <%= button_to "Add to my Library", add_book_to_user_books_path(:id => book.id), method: :post %>
+    </div>
+    <hr>
+<% end %>
+<% else %>
+    <div class="container">
+        No Results
+    </div>
+<% end %>
+
+
+<!-- Show Google Books Results -->
+
+
+<h2>Results found in Google Books</h2>
+<% if @google_Books != [] %>
+<% @google_Books.each do |book| %>
+    <div class="container">    
+        <%= book.title %>
         ,
         <%= book.authors  %>
         ,
@@ -19,7 +46,8 @@
     <hr>
 <% end %>
 <% else %>
-    <div class="container">g
+    <div class="container">
         No Results
     </div>
 <% end %>
+

@@ -8,5 +8,4 @@
   </div>
   <%= link_to "Back to Library", library_path %>
 </div>
-
-  <%= button_to "Destroy this book", @book, method: :delete %>
+  <%= button_to "remove this book", remove_book_from_user_books_path(:id => @book.id), method: :delete %>
