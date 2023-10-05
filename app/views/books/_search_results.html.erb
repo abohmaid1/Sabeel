@@ -1,53 +1,43 @@
-
 <style>
     img{
         max-width: 2rem;
     }
-
 </style>
 
+<h4><%= @searched_word  %></h4>
+
 <!-- Show local database Results  -->
-
-<h2>Results found in our database</h2>
-<% if @local_Books != [] %>
-<% @local_Books.each do |book| %>
-    <div class="container">    
-        <%= book.title %>
-        ,
-        <% if book.cover.attached? %>
-            <p><%= image_tag(book.cover) %></p>
-        <% end %>     
-        <%= button_to "Add to my Library", add_book_to_user_books_path(:id => book.id), method: :post %>
-    </div>
-    <hr>
+<% if @books != [] %>
+    <% @books.each do |book| %>
+        <div class="container">    
+            <%= book.title %>
+            ,
+            <% if book.cover.attached? %>
+                <%= image_tag(book.cover) %>
+            <% end %>     
+            <%= button_to "Add to my Library", add_book_to_user_books_path(:id => book.id), method: :post %>
+        </div>
+        <hr>
+    <% end %>
 <% end %>
-<% else %>
-    <div class="container">
-        No Results
-    </div>
-<% end %>
-
 
 <!-- Show Google Books Results -->
-
-
-<h2>Results found in Google Books</h2>
-<% if @google_Books != [] %>
-<% @google_Books.each do |book| %>
-    <div class="container">    
-        <%= book.title %>
-        ,
-        <%= book.authors  %>
-        ,
-        <% if book.image_link.present? %>
-            <%= image_tag(book.image_link) %>
-        <% end %>
-    </div>
-    <hr>
+<% if @books == [] %>
+    <% if @google_books != []  %>
+    <% @google_books.each do |book| %>
+        <div class="container">    
+            <%= book["title"] %>
+            ,
+            <%# if book["imageLinks"]["thumbnail"].present? %>
+                <%# image_tag(book["image-link"]) %>
+            <%# end %>
+        </div>
+        <hr>
+    <% end %>
+    <% end %>
 <% end %>
-<% else %>
-    <div class="container">
-        No Results
-    </div>
+
+<% if books == [] && google_books == [] %>
+    <p>No Resaults Found about <%= @search_string %></p>
 <% end %>
 

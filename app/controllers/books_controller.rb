@@ -1,4 +1,5 @@
-require 'googlebooks' 
+require 'googlebooks'
+
 
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
@@ -55,23 +56,30 @@ class BooksController < ApplicationController
     end
   end
 
-  # DELETE /books/1 or /books/1.json
-  
-
-
   def search
     if params[:title_search].present?
-      @google_Books = GoogleBooks.search(params[:title_search])
-      @local_Books = Book.filter_by_title(params[:title_search])
+      replacements = {' ' => '+'}
+      @books = Book.filter_by_title(params[:title_search])
+      @searched_word = (params[:title_search].strip).gsub(Regexp.union(replacements.keys), replacements)  
+      if @books.blank?
+        @google_books_fetsh = HTTP.get("https://www.googleapis.com/books/v1/volumes?q=intitle:" + @searched_word + "&key=AIzaSyDS_TensPgC0wiMxZSkbBgeasefizc9H60")
+        @google_book_fetsh.blank?
+          @google_books_fetsh = JSON.parse(@google_books_fetsh)["items"]
+          @google_books = Array.new
+          for @book in @google_books_fetsh do
+            @google_books.push(@book["volumeInfo"])
+          end
+          @books = []
+      end
     else
-      @google_Books = []
-      @local_Books = []
+      @books = []
+      @google_books = []  
     end
-    
+
     respond_to do |format|
     format.turbo_stream do
         render turbo_stream: turbo_stream.update("search_results", 
-          partial: "books/search_results", locals: {google_Books: @google_Books, local_Books: @local_Books})
+          partial: "books/search_results", locals: {books: @books, google_books: @google_books, searched_word: @searched_word ,search_string: params[:title_search]})
       end
     end 
   end

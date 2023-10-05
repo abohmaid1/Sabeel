@@ -1,11 +1,11 @@
-<h1>Books</h1>
+<h1>My Library</h1>
 
 <div id="books">
-  <% @books.each do |book| %>
-    <p>
-      <%= link_to book.title, book %>
-    </p>
-  <% end %>
-</div>
+    <% @books.each do |book| %>
+      <p>
+        <%= render book %>
+      </p>
+    <% end %>
+  </div>
 
-<%= link_to "New book", new_book_path %>
+<%= link_to "New book", new_book_path, class: "btn btn-success" %>

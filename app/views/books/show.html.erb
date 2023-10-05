@@ -1,11 +1,7 @@
 
 <p style="color: green"><%= notice %></p>
-
-<%= render @book %>
-
-<div>
-  <%= link_to "Edit this book", edit_book_path(@book) %> |
-  </div>
-  <%= link_to "Back to Library", library_path %>
+<div class="card">
+  <%= render @book %>
 </div>
-  <%= button_to "remove this book", remove_book_from_user_books_path(:id => @book.id), method: :delete %>
+
+
