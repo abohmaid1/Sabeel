@@ -3,35 +3,24 @@
 <html>
   <head>
     <title>منصة سبيل</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-visit-control" content="reload">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "bootstrap.min.css", 'data-turbolinks-track' => true %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
-
-  <body>
-      <%= render "partial/navbar" %>
-      <%= turbo_frame_tag "modal" %>
-      <% if current_user %>
-      <% end %>
-    <% if notice%>
-    <p class="notice alert alert-success d-flex justify-content-center"><%= notice %></p>
-    <% elsif alert %>
-    <p class="alert alert-danger  d-flex justify-content-center "><%= alert %></p>
-      <% end %>
-    <div class="container">
-
-    <%= yield %>
-
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="turbo-visit-control" content="reload" />
+    <%= csrf_meta_tags %> <%= csp_meta_tag %>
     
-  </div>
+    
+    <%= stylesheet_link_tag "application"%> 
+    <%=javascript_importmap_tags %>
+  </head>
   
-
-      <%= javascript_include_tag "popper.min.js",  'data-turbolinks-track' => true %>
-      <%= javascript_include_tag "jquery-3.7.1.min.js",  'data-turbolinks-track' => true %>
-      <%= javascript_include_tag "bootstrap.bundle.min.js", 'data-turbolinks-track' => true %>
+  <body>
+    <%= render "partial/navbar" %> <%= turbo_frame_tag "modal" %> <% if
+    current_user %> <% end %> <% if notice%>
+    <p class="notice alert alert-success d-flex justify-content-center">
+      <%= notice %>
+    </p>
+    <% elsif alert %>
+    <p class="alert alert-danger d-flex justify-content-center"><%= alert %></p>
+    <% end %>
+    <div class="container"><%= yield %></div>
   </body>
 </html>
