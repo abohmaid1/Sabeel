@@ -52,10 +52,12 @@ class BooksController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
+
     end
   end
 
   def search
+    @ResaultFlag = true
     if params[:title_search].present?
       replacements = {' ' => '+'}
       @books = Book.filter_by_title(params[:title_search])
@@ -65,8 +67,13 @@ class BooksController < ApplicationController
         @google_book_fetsh.blank?
           @google_books_fetsh = JSON.parse(@google_books_fetsh)["items"]
           @google_books = Array.new
-          for @book in @google_books_fetsh do
-            @google_books.push(@book["volumeInfo"])
+          if @google_books_fetsh.present?
+            for @book in @google_books_fetsh do
+              @google_books.push(@book["volumeInfo"])
+            end
+          else
+            @ResaultFlag = false
+            google_books = []
           end
           @books = []
       end
@@ -78,10 +85,11 @@ class BooksController < ApplicationController
     respond_to do |format|
     format.turbo_stream do
         render turbo_stream: turbo_stream.update("search_results", 
-          partial: "books/search_results", locals: {books: @books, google_books: @google_books, searched_word: @searched_word ,search_string: params[:title_search]})
+          partial: "books/search_results", locals: {books: @books,ResaultFlag: @ResaultFlag, google_books: @google_books, searched_word: @searched_word ,search_string: params[:title_search]})
       end
     end 
   end
+
 
   def remove_book_from_user
     respond_to do |format|

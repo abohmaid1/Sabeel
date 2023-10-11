@@ -29,6 +29,9 @@
           <% unless controller_name === 'books' %> 
             <%= link_to "مكتبتي", library_path, class: "btn btn-info" %>
           <% end %> 
+          <% if current_user.role == "writer" %>
+            <%# link_to "مكتبتي", pages_path, class: "btn btn-info" %>
+          <% end %>
         <% end %>
         <li class="nav-item dropdown">
           <a

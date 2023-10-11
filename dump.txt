@@ -1,10 +1,22 @@
-import { Turbo } from "@hotwired/turbo-rails"
-Turbo.session.drive = false
 
 
+<!-- Show Google Books Results -->
+<% if @books == [] %>
+    <% if @google_books != []  %>
+    <% @google_books.each do |book| %>
+        <div class="container">    
+            <%= book["title"] %>
+            ,
+            <%# if book["imageLinks"]["thumbnail"].present? %>
+                <%# image_tag(book["image-link"]) %>
+            <%# end %>
+        </div>
+        <hr>
+    <% end %>
+    <% end %>
+<% end %>
 
+<% if books == [] && google_books == [] %>
+    <p>No Resaults Found about <%= @search_string %></p>
+<% end %>
 
-    <%= stylesheet_link_tag "bootstrap.min.css", 'data-turbolinks-track' => true, "data-turbolinks" => false  %>
-
-
-    

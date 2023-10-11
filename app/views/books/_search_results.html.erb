@@ -1,11 +1,11 @@
 <style>
     img{
-        max-width: 2rem;
+        max-width: 10rem;
     }
 </style>
 
-<h4><%= @searched_word  %></h4>
 
+<h4><%= @searched_word  %></h4>
 <!-- Show local database Results  -->
 <% if @books != [] %>
     <% @books.each do |book| %>
@@ -23,21 +23,27 @@
 
 <!-- Show Google Books Results -->
 <% if @books == [] %>
-    <% if @google_books != []  %>
+    <% if @google_books != [] %>
+    <%= @google_books %>
     <% @google_books.each do |book| %>
         <div class="container">    
             <%= book["title"] %>
             ,
-            <%# if book["imageLinks"]["thumbnail"].present? %>
-                <%# image_tag(book["image-link"]) %>
-            <%# end %>
+            <% if book["imageLinks"].present? %>
+                <%= image_tag(book["imageLinks"]["thumbnail"]) %>
+            <% else %>
+                No Image To Show
+            <% end %>
+            ,
+            <%= book[""]  %>
         </div>
         <hr>
     <% end %>
     <% end %>
 <% end %>
 
-<% if books == [] && google_books == [] %>
-    <p>No Resaults Found about <%= @search_string %></p>
-<% end %>
 
+
+<% if !@ResaultFlag %>
+    <p>No Resault about <%= @searched_word %></p>
+<% end %>
