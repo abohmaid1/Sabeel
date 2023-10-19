@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl"></html>
 <html>
   <head>
     <title>منصة سبيل</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="turbo-visit-control" content="reload" />
+    <%# <meta name="turbo-visit-control" content="reload" /> %>
+    <script src="https://cdn.tailwindcss.com"></script>
     <%= csrf_meta_tags %> <%= csp_meta_tag %>
-    
-    
-    <%= stylesheet_link_tag "application"%> 
+    <%= stylesheet_link_tag "application"%>
     <%=javascript_importmap_tags %>
   </head>
-  
   <body>
-    <%= render "partial/navbar" %> <%= turbo_frame_tag "modal" %> <% if
-    current_user %> <% end %> <% if notice%>
-    <p class="notice alert alert-success d-flex justify-content-center">
-      <%= notice %>
-    </p>
+    <%= render "partial/navbar" %>
+    <%= turbo_frame_tag "modal" %>
+    <% if user_signed_in? %>
+    <% end %>
+    <% if notice%>
+      <p class="notice">
+        <%= notice %>
+      </p>
     <% elsif alert %>
-    <p class="alert alert-danger d-flex justify-content-center"><%= alert %></p>
+      <p class="alert">
+        <%= alert %>
+      </p>
     <% end %>
     <div class="container"><%= yield %></div>
   </body>

@@ -1,8 +1,7 @@
-<%= form_for @book do |form| %>
+<%= form_for @book,:html => { :class => 'test' } do |form| %>
   <% if book.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
       <ul>
         <% book.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,23 +9,20 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :discription, style: "display: block" %>
-    <%= form.text_field :discription %>
-  </div>
-
-  <div>
-    <%= form.file_field :cover %>
-  </div>
-
-
-  <div>
-    <%= form.submit %>
+  <div class="grid gap-6 mb-6 md:grid-cols-2">
+    <div>
+      <%= form.label :title, style: "display: block" %>
+      <%= form.text_field :title %>
+    </div>
+    <div>
+      <%= form.label :discription, style: "display: block" %>
+      <%= form.text_field :discription , class:'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'%>
+    </div>
+    <div>
+      <%= form.file_field :cover , class:'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'%>
+    </div>
+    <div>
+      <%= form.submit %>
+    </div>
   </div>
 <% end %>

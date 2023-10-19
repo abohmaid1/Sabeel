@@ -74,7 +74,6 @@ GEM
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
-    bootstrap (5.3.1)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
       sassc-rails (>= 2.0.0)
@@ -112,6 +111,7 @@ GEM
       activesupport (>= 5.0)
     googlebooks (0.0.9)
       httparty
+    htmlbeautifier (1.4.2)
     http (5.1.1)
       addressable (~> 2.8)
       http-cookie (~> 1.0)
@@ -284,11 +284,11 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  bootstrap (~> 5.3)
   capybara
   debug
   devise (~> 4.9)
   googlebooks (~> 0.0.9)
+  htmlbeautifier
   http (~> 5.1)
   httparty (~> 0.21.0)
   importmap-rails

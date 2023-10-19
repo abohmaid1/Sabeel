@@ -31,6 +31,8 @@ gem "bootsnap", require: false
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'htmlbeautifier'
+
 end
 
 group :development do
@@ -50,5 +52,3 @@ gem 'route_downcaser'
 gem 'openlibrary'
 gem "httparty", "~> 0.21.0"
 gem "http", "~> 5.1"
-
-gem "bootstrap", "~> 5.3"

@@ -1,49 +1,39 @@
 <style>
-    img{
-        max-width: 10rem;
-    }
+  img {
+    max-width: 10rem;
+  }
 </style>
-
-
-<h4><%= @searched_word  %></h4>
 <!-- Show local database Results  -->
 <% if @books != [] %>
-    <% @books.each do |book| %>
-        <div class="container">    
-            <%= book.title %>
-            ,
-            <% if book.cover.attached? %>
-                <%= image_tag(book.cover) %>
-            <% end %>     
-            <%= button_to "Add to my Library", add_book_to_user_books_path(:id => book.id), method: :post %>
-        </div>
-        <hr>
+  <% @books.each do |book| %>
+    <div class="container">
+      <%= book.title %> ,
+      <% if book.cover.attached? %>
+        <%= image_tag(book.cover) %>
+      <% end %>
+      <%= button_to "Add to my Library", add_book_to_user_books_path(:id => book.id), method: :post %>
+    </div>
+    <hr />
+  <% end %>
+<% else %>
+  <% if @google_books != [] %>
+    <%@google_books.each do |book| %>
+      <div class="container">
+        <%= book["title"] %> , 
+        <% if book["imageLinks"].present? %>
+          <%=image_tag(book["imageLinks"]["thumbnail"]) %>
+        <% else %>
+          No Image To Show 
+        <% end %> , 
+        <%= book[""] %>
+      </div>
+      <hr />
     <% end %>
+  <% end %>
 <% end %>
-
 <!-- Show Google Books Results -->
 <% if @books == [] %>
-    <% if @google_books != [] %>
-    <%= @google_books %>
-    <% @google_books.each do |book| %>
-        <div class="container">    
-            <%= book["title"] %>
-            ,
-            <% if book["imageLinks"].present? %>
-                <%= image_tag(book["imageLinks"]["thumbnail"]) %>
-            <% else %>
-                No Image To Show
-            <% end %>
-            ,
-            <%= book[""]  %>
-        </div>
-        <hr>
-    <% end %>
-    <% end %>
 <% end %>
-
-
-
 <% if !@ResaultFlag %>
-    <p>No Resault about <%= @searched_word %></p>
+  <p>No Resault about <%= @searched_word %></p>
 <% end %>

@@ -1,77 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <%= link_to root_path do %>
-    <div class="navbar-brand">
-      <img
-        src="/docs/4.3/assets/brand/bootstrap-solid.svg"
-        width="30"
-        height="30"
-        class="d-inline-block align-top"
-        alt=""
-      />
-      منصة سبيل
-    </div>
-    <% end %>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <% if current_user %> 
-          <% unless controller_name === 'books' %> 
-            <%= link_to "مكتبتي", library_path, class: "btn btn-info" %>
-          <% end %> 
-          <% if current_user.role == "writer" %>
-            <%# link_to "مكتبتي", pages_path, class: "btn btn-info" %>
-          <% end %>
-        <% end %>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <% if !current_user %> الحساب 
-            <% else %> 
-              <%= current_user.username %>
-            <% end %>
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% if current_user %>
-            <li>
-              <%= link_to "بياناتي", edit_user_registration_path, class: "dropdown-item"%>
-            </li>
-            <li>
-              <%= link_to "تسجيل الخروج", destroy_user_session_path, class: "dropdown-item" %>
-            </li>
-            <% else %>
-            <li>
-              <%= link_to "إنشاء حساب جديد", new_user_registration_path, class: "dropdown-item"%>
-            </li>
-            <li>
-              <%= link_to "تسجيل الدخول", new_user_session_path, class: "dropdown-item" %>
-            </li>
-            <% end %>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<script>
-  $(document).on('turbolinks:load', function() {
-    $('.dropdown-toggle').dropdown()
-  })
-</script>
+<% if !user_signed_in? && !admin_signed_in?%>
+  <%= link_to "Sign in user", new_user_session_path %>
+  <br>
+  <%= link_to "Sign in admin", new_admin_session_path %>
+<% end %>
+<% if user_signed_in? %>
+  <%= link_to "Sign out", destroy_user_session_path %>
+<% end %>
+<% if admin_signed_in? %>
+  <h4>you are an admin</h4>
+  <%= link_to "Sign out", destroy_admin_session_path %>
+<% end %>
