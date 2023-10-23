@@ -100,7 +100,7 @@ class BooksController < ApplicationController
     end
   end
   
-  def add_book_to_user()
+  def add_book_to_user
     @book = set_book
     @check = UserHaveBook.where(user_id: current_user, book_id: @book.id)
     respond_to do |format|
