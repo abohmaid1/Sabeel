@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     collection do
       post :search
       post :add_book_to_user
+      get :add_book_to_database
       delete :remove_book_from_user
     end
   end

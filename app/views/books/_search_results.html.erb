@@ -19,13 +19,21 @@
   <% if @google_books != [] %>
     <%@google_books.each do |book| %>
       <div class="container">
-        <%= book["title"] %> , 
+        <%= book["title"] %> ,
+        <br>
+        <%= book["authors"]  %>,
+        <br>
+        <%= book["description"]  %>
+        <br>
         <% if book["imageLinks"].present? %>
-          <%=image_tag(book["imageLinks"]["thumbnail"]) %>
+          <% @cover_tag = book["imageLinks"]["thumbnail"] %>
+          <%= image_tag(book["imageLinks"]["thumbnail"]) %>
         <% else %>
+          <% @cover_tag = "" %>
           No Image To Show 
-        <% end %> , 
-        <%= book[""] %>
+        <% end %>
+        <br>
+        <%= link_to "Add to my Library", add_book_to_database_books_path(title: book["title"], description: book["description"], cover_tag: @cover_tag), method: :get %>
       </div>
       <hr />
     <% end %>

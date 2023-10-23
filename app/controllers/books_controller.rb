@@ -1,4 +1,5 @@
 require 'googlebooks'
+require 'open-uri'
 
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
@@ -37,11 +38,7 @@ class BooksController < ApplicationController
       end
     end
   end
-
-  def add_to_user
-    
-  end
-
+  
   # PATCH/PUT /books/1 or /books/1.json
   def update
     respond_to do |format|
@@ -76,24 +73,24 @@ class BooksController < ApplicationController
             google_books = []
           end
           @books = []
+        end
+      else
+        @books = []
+        @google_books = []  
       end
-    else
-      @books = []
-      @google_books = []  
-    end
-
-    respond_to do |format|
-    format.turbo_stream do
-        render turbo_stream: turbo_stream.update("search_results", 
+      
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update("search_results", 
           partial: "books/search_results", locals: {books: @books,ResaultFlag: @ResaultFlag, google_books: @google_books, searched_word: @searched_word ,search_string: params[:title_search]})
-      end
-    end 
-  end
+        end
+      end 
+    end
+    
 
-
-  def remove_book_from_user
-    respond_to do |format|
-      if current_user.books.delete(Book.find(params[:id]))
+    def remove_book_from_user
+      respond_to do |format|
+        if current_user.books.delete(Book.find(params[:id]))
         format.html { redirect_to library_url, notice: "Book removed" }
         format.json { render :library, status: :ok}
       else
@@ -102,8 +99,8 @@ class BooksController < ApplicationController
       end
     end
   end
-
-  def add_book_to_user
+  
+  def add_book_to_user()
     @book = set_book
     @check = UserHaveBook.where(user_id: current_user, book_id: @book.id)
     respond_to do |format|
@@ -115,8 +112,29 @@ class BooksController < ApplicationController
       end
     end
   end
+  
+  def add_book_to_database
+    @passed_value = params[:title]
+    @book = Book.new()
+    @book.title = params[:title]
+    @book.discription = params[:description]
+    if params[:cover_tag] != ""
+      @image = URI.parse(params[:cover_tag]).open
+      @book.cover.attach(io: @image , filename: "cover.jpeg")
+    end
 
 
+    respond_to do |format|
+      if @book.save!
+        @book.users << current_user
+        format.html { redirect_to library_url, notice: "Book Added" }
+      else
+        format.html { redirect_to library_url, alert: "Book Already in your library" }
+      end
+    end
+  end
+  
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
