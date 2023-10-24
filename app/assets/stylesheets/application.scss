@@ -1,16 +1,39 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
- @import 'bootstrap';
+@import 'bootstrap';
+:root{
+    --white-color:                  #ffffff;
+    --primary-color:                #D6B16C;
+    --secondary-color:              #603620;
+    --section-bg-color:             #F0DAAE;
+    --site-footer-bg-color:         #363600;
+    --custom-btn-bg-color:          #00a05d;
+    --dark-color:                   #000000;
+    --p-color:                      #9B3C27;
+    --border-color:                 #cb9650;
+  
+    --twitter-color:                #1da1f2;
+    --facebook-color:               #1877f2;
+    --instagram-color:              #c13584;
+    --pinterest-color:              #e60023;
+    --whatsapp-color:               #128c7e;
+  
+    --h1-font-size:                 62px;
+    --h2-font-size:                 48px;
+    --h3-font-size:                 36px;
+    --h4-font-size:                 32px;
+    --h5-font-size:                 24px;
+    --h6-font-size:                 22px;
+    --p-font-size:                  20px;
+    --btn-font-size:                16px;
+    --copyright-font-size:          14px;
+  
+    --border-radius-large:          100px;
+    --border-radius-medium:         20px;
+    --border-radius-small:          10px;
+  
+    --font-weight-thin:             100;
+    --font-weight-light:            300;
+    --font-weight-normal:           400;
+    --font-weight-semibold:         600;
+    --font-weight-bold:             700;
+}
+
