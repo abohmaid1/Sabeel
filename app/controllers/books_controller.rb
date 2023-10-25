@@ -2,7 +2,7 @@ require 'googlebooks'
 require 'open-uri'
 
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show  destroy ]
+  before_action :set_book, only: %i[ show edit destroy ]
   before_action :authenticate_user!
 
   # GET /books or /books.json
