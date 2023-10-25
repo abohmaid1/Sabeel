@@ -2,7 +2,7 @@ require 'googlebooks'
 require 'open-uri'
 
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :set_book, only: %i[ show  destroy ]
   before_action :authenticate_user!
 
   # GET /books or /books.json
@@ -114,16 +114,11 @@ class BooksController < ApplicationController
   end
   
   def add_book_to_database
-    @passed_value = params[:title]
-    @book = Book.new()
+    @book = Book.new
     @book.title = params[:title]
     @book.discription = params[:description]
-    if params[:cover_tag] != ""
-      @image = URI.parse(params[:cover_tag]).open
-      @book.cover.attach(io: @image , filename: "cover.jpeg")
-    end
-
-
+    @book.google_book_picture_tag = params[:cover_tag]
+    
     respond_to do |format|
       if @book.save!
         @book.users << current_user
@@ -143,6 +138,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :discription, :cover, user_have_book_attributes: [:user_rate, :availbe_to_trade], user_ids: [])
+      params.require(:book).permit(:title, :discription, user_have_book_attributes: [:user_rate, :availbe_to_trade], user_ids: [])
     end
 end
