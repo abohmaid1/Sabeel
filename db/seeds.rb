@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+
+SupportedGovernate.create!([
+{name: "دمشق"},
+{name: "ريف دمشق"},
+{name: "جلب"},
+{name: "حماه"},
+{name: "اللاذقية"},
+{name: "حمص"},
+{name: "دير الزور"},
+{name: "السويداء"},
+{name: "إدلب"},
+{name: "طرطوس"},
+{name: "القنيطرة"},
+{name: "الرقة"},
+{name: "الحسكة"},
+{name: "درعا"},
+])

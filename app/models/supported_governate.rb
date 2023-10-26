@@ -1,0 +1,2 @@
+class SupportedGovernate < ApplicationRecord
+end
