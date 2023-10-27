@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
+  
+  root 'main#index'
+  get 'main/abouts_us'
+
+  #error routes
+  match "/404", to: "errors#page_not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
+  
   #Books Routes
+  get 'library', :to => 'books#index'
   resources :books, :except => [:index, :delete] do
     collection do
       post :search
@@ -8,7 +17,6 @@ Rails.application.routes.draw do
       delete :remove_book_from_user
     end
   end
-  get 'library', :to => 'books#index'
   
 
   #Devise Routes
@@ -30,7 +38,8 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
     sessions: 'admins/sessions'
   }
-  
-  root 'main#index'
-  get 'main/abouts_us'
+
+  devise_for :meeting_places, controllers: {
+    sessions: 'meeting_place/sessions'
+  }
 end
