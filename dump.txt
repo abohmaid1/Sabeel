@@ -32,3 +32,22 @@
   <h4>you are an admin</h4>
   <%= link_to "Sign out", destroy_admin_session_path %>
 <% end %>
+
+
+<div >
+  <p>
+    <strong>Title:</strong>
+    
+  </p>
+  <p>
+    <strong>Discription:</strong>
+    <%= book.discription %>
+  </p>
+  <% if !book.google_book_picture_tag.blank? %>
+    <p><%= image_tag(book.google_book_picture_tag, style:"width: 150px;") %></p>
+  <% end %>
+  <div>
+    <%= link_to "Edit this book", edit_book_path(book), class:"btn btn-warning" %>
+    <%= button_to "remove this book", remove_book_from_user_books_path(:id => book.id), method: :delete,class: "btn btn-danger", data: {turbo_confirm: "Are you sure?"}%>
+  </div>
+</div>

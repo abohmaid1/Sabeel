@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_26_170153) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_27_112023) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_170153) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "google_book_picture_tag"
+  end
+
+  create_table "creating_meeting_place_requests", force: :cascade do |t|
+    t.string "email"
+    t.string "stor_name"
+    t.string "owner_name"
+    t.string "city_name"
+    t.string "location_details"
+    t.bigint "governate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["governate"], name: "index_creating_meeting_place_requests_on_governate"
   end
 
   create_table "meeting_places", force: :cascade do |t|
@@ -119,6 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_26_170153) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "creating_meeting_place_requests", "supported_governates", column: "governate"
   add_foreign_key "meeting_places", "supported_governates", column: "governate"
   add_foreign_key "user_have_books", "books"
   add_foreign_key "user_have_books", "users"

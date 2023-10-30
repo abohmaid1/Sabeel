@@ -1,0 +1,1 @@
+json.partial! "creating_meeting_place_requests/creating_meeting_place_request", creating_meeting_place_request: @creating_meeting_place_request

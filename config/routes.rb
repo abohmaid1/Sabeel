@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :creating_meeting_place_requests
+  
   root 'main#index'
   get 'main/abouts_us'
 

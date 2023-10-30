@@ -1,7 +1,6 @@
-<div id="<%= dom_id book %>">
+<div>
   <p>
     <strong>Title:</strong>
-    <%= book.title %>
   </p>
   <p>
     <strong>Discription:</strong>
@@ -13,5 +12,20 @@
   <div>
     <%= link_to "Edit this book", edit_book_path(book), class:"btn btn-warning" %>
     <%= button_to "remove this book", remove_book_from_user_books_path(:id => book.id), method: :delete,class: "btn btn-danger", data: {turbo_confirm: "Are you sure?"}%>
+  </div>
+</div>
+<div class="card hover",id="<%= dom_id book %>">
+  <div class="card-img" style="background-image:url(https://images.unsplash.com/photo-1493847242172-d46053a1f671?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=9f91dd5d50f16ba80af53a62d4caf2ce&auto=format&fit=crop&w=500&q=60);">
+    <div class="overlay">
+      <div class="overlay-content">
+        <a class="hover" href="#!">View Project</a>
+      </div>
+    </div>
+  </div>
+  <div class="card-content">
+    <a href="#!">
+      <%= book.title %>
+      <p>Lorem ipsum dolor sit amet consectetur, lorem ipsum dolor</p>
+    </a>
   </div>
 </div>

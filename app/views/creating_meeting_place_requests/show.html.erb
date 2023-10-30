@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @creating_meeting_place_request %>
+
+<div>
+  <%= link_to "Edit this creating meeting place request", edit_creating_meeting_place_request_path(@creating_meeting_place_request) %> |
+  <%= link_to "Back to creating meeting place requests", creating_meeting_place_requests_path %>
+
+  <%= button_to "Destroy this creating meeting place request", @creating_meeting_place_request, method: :delete %>
+</div>

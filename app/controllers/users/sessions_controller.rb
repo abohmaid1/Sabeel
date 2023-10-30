@@ -4,15 +4,17 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    @disable_nav = true
+    super
+  end
 
   # POST /resource/sign_in
-  # def create
-  #   @user = current_user
-  #   super
-  # end
+  def create
+    @disable_nav = true
+    @user = current_user
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy

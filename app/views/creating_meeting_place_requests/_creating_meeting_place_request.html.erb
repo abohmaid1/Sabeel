@@ -1,0 +1,33 @@
+<div id="<%= dom_id creating_meeting_place_request %>">
+  <p>
+    <strong>Email:</strong>
+    <%= creating_meeting_place_request.email %>
+  </p>
+  <p>
+    <strong>Stor name:</strong>
+    <%= creating_meeting_place_request.stor_name %>
+  </p>
+  <p>
+    <strong>Owner name:</strong>
+    <%= creating_meeting_place_request.owner_name %>
+  </p>
+  <% if creating_meeting_place_request.contract.attached? %>
+    <p>
+      <%= creating_meeting_place_request.contract  %>
+      <strong>Contrac image:</strong>
+      <%= image_tag(creating_meeting_place_request.contract, style:"width: 150px;") %>
+    </p>
+  <% end %>
+  <p>
+    <strong>City name:</strong>
+    <%= creating_meeting_place_request.city_name %>
+  </p>
+  <p>
+    <strong>Location details:</strong>
+    <%= creating_meeting_place_request.location_details %>
+  </p>
+  <p>
+    <strong>governate:</strong>
+    <%= creating_meeting_place_request.governate %>
+  </p>
+</div>
