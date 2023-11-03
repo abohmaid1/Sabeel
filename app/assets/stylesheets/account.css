@@ -1,14 +1,6 @@
-body{
-    font-family: 'Marhey', sans-serif;
-  }
-  input {
-    font-family: 'Marhey', sans-serif;
-  }
-
 .container-fluid .row{
   background-color: #9b3c27;
 }
-
 
 form {
   width: 400px;

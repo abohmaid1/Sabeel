@@ -18,8 +18,16 @@ $almost-white: rgb(238, 238, 238);
   border-radius: 50%;
 }
 
-.container {
-  box-sizing: content-box;
+body{
+  background-color: var(--primary-color);
+}
+
+.bookshelf-col{
+  background-color: var(--secondary-color);
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.5);
+}
+
+.container-book {
   width: 400px;
   height: 400px;
   position: relative;
@@ -151,6 +159,7 @@ $almost-white: rgb(238, 238, 238);
 }
 
 .elephant {
+  
   position: absolute;
   width: 20%;
   height: 20%;

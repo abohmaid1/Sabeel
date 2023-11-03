@@ -36,3 +36,18 @@
     --font-weight-semibold:         600;
     --font-weight-bold:             700;
 }
+
+body{
+    font-family: 'Marhey', sans-serif;
+  }
+  input {
+    font-family: 'Marhey', sans-serif;
+  }
+
+#notice-wraper{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    text-align: center;
+}

@@ -1,0 +1,18 @@
+<% if notice %>
+  <div id="notice-wraper">
+    <p class="alert alert-success"><%= notice  %></p>
+  </div>
+<% elsif alert %>
+  <div id="notice-wraper">
+    <p class="alert alert-danger"><%= alert %></p>
+  </div>
+<% end %>
+<script>
+  $(document).ready(function(){
+      setTimeout(function(){
+          $('#notice-wraper').fadeOut("slow", function(){
+              $this.remove();
+          })
+      }, 2000);
+  });
+</script>

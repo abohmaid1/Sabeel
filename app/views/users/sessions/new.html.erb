@@ -1,52 +1,15 @@
-<%= stylesheet_link_tag "account"%>
-<%= stylesheet_link_tag "bookshelf"%>
+ <%= stylesheet_link_tag "account"%>
 <div class="container-fluid">
-  <div class="container", style="box-sizing: content-box;">
-    <div class="book-shelf"></div>
-    <div class="book"></div>
-    <div class="book"></div>
-    <div class="book"></div>
-    <div class="book"></div>
-    <div class="speech-bubble">
-      <div class="heart"></div>
-    </div>
-    <div class="elephant">
-      <div class="head">
-        <div class="eye"></div>
-        <div class="trunk">
-          <div class="trunk-line"></div>
-          <div class="trunk-line"></div>
-          <div class="trunk-line"></div>
-        </div>
-      </div>
-      <div class="body">
-        <div class="leg leg-left"></div>
-        <div class="leg leg-left leg-left-behind"></div>
-        <div class="leg leg-right"></div>
-        <div class="leg leg-right leg-right-behind"></div>
-      </div>
-    </div>
-    <div class="plant">
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="stem"></div>
-      <div class="pot-top"></div>
-      <div class="pot-container">
-        <div class="pot"></div>
-      </div>
-    </div>
-  </div>
   <div class="row  justify-content-center align-items-center" style="height: 100vh;">
     <div class=" mx-auto">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <h2> تسجيل دخول</h2>
         <div class="form-group email">
-          <label for="email">البريد الالكتروني</label>
+          <label for="user_email">البريد الالكتروني</label>
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
         </div>
         <div class="form-group password">
-          <label for="password">كلمة المرور</label>
+          <label for="user_password">كلمة المرور</label>
           <%= f.password_field :password, autocomplete: "current-password" %>
           <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
         </div>
@@ -58,13 +21,8 @@
             </span>
           </div>
         <% end %>
-        <% if alert %>
-          <p class="alert alert-danger">
-            <%= alert %>
-          </p>
-        <% end %>
         <div class="form-group submit-btn">
-          <%= f.submit "Log in" %>
+          <%= f.submit "افتح يا سمسم" %>
         </div>
         <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
           <%= link_to "نسيت كلمة السر", new_password_path(resource_name), style: "color: var(--secondary-color);"  %><br />

@@ -16,6 +16,9 @@
       rel="stylesheet">
     </head>
     <body>
+      <% if notice || alert %>
+        <%= render "partial/notice" %>
+      <% end %>
       <% if current_user %>
         <%= render "partial/userNavbar", unless: @disable_nav %>
       <% end %>
