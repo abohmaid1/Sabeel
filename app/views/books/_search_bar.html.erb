@@ -1,4 +1,6 @@
-<div data-controller="debounce"></div>
-<%= form_with url: search_books_path, method: :post, data: {controller: "debounce", debounce_target: "form"} do |form| %>
-  <%= form.search_field :title_search, data: {action: "input->debounce#search"} %>
-<% end %>
+ <%= stylesheet_link_tag "forms"%>
+<div data-controller="debounce">
+  <%= form_with url: search_books_path, method: :post, data: {controller: "debounce", debounce_target: "form"} do |form| %>
+    <%= form.search_field :title_search, data: {action: "input->debounce#search"} %>
+  <% end %>
+</div>

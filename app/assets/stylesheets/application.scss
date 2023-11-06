@@ -38,11 +38,11 @@
 }
 
 body{
-    font-family: 'Marhey', sans-serif;
+  font-family: 'Marhey', sans-serif;
   }
-  input {
-    font-family: 'Marhey', sans-serif;
-  }
+input {
+  font-family: 'Marhey', sans-serif;
+}
 
 #notice-wraper{
     position: absolute;
@@ -50,4 +50,24 @@ body{
     width: 100%;
     z-index: 9999;
     text-align: center;
+}
+
+.modal-content{
+  background-color: var(--secondary-color);
+  border-radius: 50px;
+}
+
+.modal-header{
+  background-color: var(--secondary-color);
+}
+.modal-body{
+  background-color: var(--primary-color);
+}
+
+.turbo-progress-bar {
+  position: relative;
+    height: 10px;
+    width: 1110%;
+    border: 10px solid #f4a261;
+    border-radius: 15px;
 }

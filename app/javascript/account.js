@@ -21,7 +21,7 @@ const handleFormData = (e) => {
     // Retrieving input elements
     const fullnameInput = document.getElementById("user_username");
     const emailInput = document.getElementById("user_email");
-    const dateInput = document.getElementById("date");
+    const dateInput = document.getElementById("user_birthdate");
     const cityInput = document.getElementById("user_location");
     
 
@@ -50,7 +50,7 @@ const handleFormData = (e) => {
     if (password === "") {
         showError(passwordInput, "ادخل كلمة المرور الخاصة بك");
     }
-    console.log(password.length)
+    
     if (password.length < 6 && password != ""){
         showError(passwordInput, "كلمة المرور قصيرة!");
     }

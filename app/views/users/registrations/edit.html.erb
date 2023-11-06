@@ -22,7 +22,7 @@
           <%= f.date_field :birthdate, autocomplete: "birthdate" %>
         </div>
         <div class="form-group">
-          <%= f.label :محافظتك %>
+          <label for="user_location">محافظتك</label>
           <%= f.collection_select(:location, SupportedGovernate.all, :id, :name) %>
         </div>
         <div class="form-group">
@@ -33,7 +33,7 @@
           <% end %>
         </div>
         <div class="form-group">
-          <%= f.label :password_confirmation %>
+          <label for="user_password_confirmation">تأكيد كلمة المرور الجديدة</label>
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
         <div class="form-group">
@@ -41,7 +41,7 @@
           <%= f.password_field :current_password, autocomplete: "current-password" %>
         </div>
         <div class="form-group submit-btn">
-          <%= f.submit "Update" %>
+          <%= f.submit "تحديث بياناتي" %>
         </div>
       <% end %>
     </div>

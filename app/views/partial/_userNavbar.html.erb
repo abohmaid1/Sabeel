@@ -39,10 +39,10 @@
                 <ul class="dropdown-menu dropdown-menu-light"
                                 aria-labelledby="navbarLightDropdownMenuLink">
                   <li>
-                    <%= link_to "تسجيل خروج", destroy_user_session_path, class: "dropdown-item" %>
+                    <%= link_to "حسابي", edit_user_registration_path, class: "dropdown-item" %>
                   </li>
                   <li>
-                    <%= link_to "حسابي", edit_user_registration_path, class: "dropdown-item" %>
+                    <%= link_to "تسجيل خروج", destroy_user_session_path, class: "dropdown-item" %>
                   </li>
                 </ul>
               </li>
@@ -75,10 +75,10 @@
           <ul class="dropdown-menu dropdown-menu-light"
                                 aria-labelledby="navbarLightDropdownMenuLink">
             <li>
-              <%= link_to "تسجيل دخول", new_user_session_path, class: "dropdown-item" %>
+              <%= link_to "حسابي", edit_user_registration_path, class: "dropdown-item" %>
             </li>
             <li>
-              <%= link_to "إنشاء حساب", new_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "تسجيل دخول", new_user_session_path, class: "dropdown-item" %>
             </li>
           </ul>
         </li>
