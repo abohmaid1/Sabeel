@@ -84,7 +84,7 @@
             للطرفين.</h6>
           <p>يمكنك إنشاء الملتقى الخاص بك الآن لتساهم في
             عمليات تبادل الكتب</p>
-          <a href class="allbutton allbut"> إنشاء ملتقى</a>
+          <%= link_to "إنشاء ملتقى", new_creating_meeting_place_request_path, class: "allbutton allbut" %>
         </div>
         <div class="col-lg-3 col-md-5 col-5 mx-lg-auto">
           <%= image_tag("meeting4.jpg", class: "meeting-img meeting-img-small img-fluid") %>
@@ -106,7 +106,7 @@
     <div class="row">
       <div class="col-lg-3 col-md-5 col-12 mb-3">
         <h6><a href="index.html" class="custom-link mb-1">سبيل</a></h6>
-        <p><a href="admin.html">مدير النظام</a></p>
+        <p><%= link_to "مدير_النظام", new_admin_session_path %></p>
       </div>
       <div class="col-lg-3 col-md-3 col-12 ms-lg-auto mb-3">
         <h6 class="text-white mb-3">الموقع</h6>

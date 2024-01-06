@@ -9,20 +9,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <%= stylesheet_link_tag "application"%>
     <%= javascript_importmap_tags %>
-    <%= javascript_include_tag "jquery.min" %>
-    <%= javascript_include_tag "jquery-3.7.1.min" %>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa&family=Lateef:wght@300&family=Marhey&display=swap"
-      rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa&family=Lateef:wght@300&family=Marhey&display=swap" rel="stylesheet">
     </head>
     <body>
       <% if notice || alert %>
         <%= render "partial/notice" %>
       <% end %>
       <% if current_user %>
-        <%= render "partial/userNavbar", unless: @disable_nav %>
+        <%=render "partial/userNavbar", unless: @disable_nav %>
       <% end %>
       <%= yield %>
     </body>

@@ -20,6 +20,13 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :users do
+    member do
+      patch 'lock'
+      patch 'unlock'
+    end
+  end
+  
 
   #Devise Routes
   devise_for :users, controllers: {
@@ -34,11 +41,13 @@ Rails.application.routes.draw do
   devise_scope :admin do
     get '/admins/sign_out' => 'devise/sessions#destroy'
     get '/admin/dashboard' => 'admin_actions#dashboard'
-    
+    get '/admin/user_list' => 'admin_actions#user_list'
+
   end
 
   devise_for :admins, controllers: {
-    sessions: 'admins/sessions'
+    sessions: 'admins/sessions',
+    registrations: 'admins/registrations'
   }
 
   devise_for :meeting_places, controllers: {

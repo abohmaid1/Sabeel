@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <table class="table table-hover table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Number of Books</th>
+        <th>Actions</th>
+        <!-- New column for actions -->
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.username %></td>
+          <td><%= user.email %></td>
+          <td><%= user.books.count %></td>
+          <td>
+            <% if user.lock %>
+              <%= link_to "Unlock", unlock_user_path(user), method: :patch, class: "btn btn-success btn-sm" %>
+            <% else %>
+              <%= link_to "Lock", lock_user_path(user), method: :patch, class: "btn btn-danger btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

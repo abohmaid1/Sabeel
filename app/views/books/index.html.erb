@@ -4,13 +4,10 @@
   }
 </style>
 <h2>مكتبتي</h2>
-<%= stylesheet_link_tag "book"%>
-<div class= "container">
-  <div class="wrapper">
-    <% @books.each do |book| %>
-      <%= render book %>
-    <% end %>
-  </div>
+<div class="container mt-4">
+  <% @books.each do |book| %>
+    <%= render book %>
+  <% end %>
 </div>
 <%# link_to "New book", new_book_path, class: "btn btn-danger" %>
 <!-- Button trigger modal -->

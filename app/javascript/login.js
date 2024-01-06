@@ -1,5 +1,5 @@
 
-const loogedPass = document.getElementById("user_password");
+const loogedPass = document.getElementsByClassName("pass")[0];
 const passwordToggleBtn = document.getElementById("pass-toggle-btn");
 
 passwordToggleBtn.addEventListener('click', () => {

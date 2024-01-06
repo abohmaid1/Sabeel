@@ -22,7 +22,7 @@
 
   --h1-font-size:                 62px;
   --h2-font-size:                 48px;
-  --h3-font-size:                 36px;
+    --h3-font-size:                 36px;
   --h4-font-size:                 32px;
   --h5-font-size:                 24px;
   --h6-font-size:                 22px;
@@ -254,21 +254,24 @@ a:hover {
   border-radius: 0;
   border: 0;
   padding: 0;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.25);
 }
 
 .dropdown-item {
   border-bottom: 1px solid var(--border-color);
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   color: var(--p-bg-color);
   font-size: var(--menu-font-size);
   font-weight: var(--font-weight-medium);
   position: relative;
   padding-top: 10px;
   padding-bottom: 10px;
+  
 }
 
 .dropdown-menu li:last-child .dropdown-item {
-  border-bottom: 0;
+  border-bottom: 2px;
 }
 
 .dropdown-item.active, 
@@ -374,7 +377,7 @@ a:hover {
 -----------------------------------------*/
 .home-section {
   position: relative;
-  padding-top: 150px;
+  padding-top: 50px;
   padding-bottom: 150px;
   min-height: 580px;
   background-image: image_url("homepage1.jpg");
@@ -587,13 +590,13 @@ color: var(--secondary-color);
     text-align: center;
   }
   .home-section{
-    background-image: url(../images/white.png);
+    background-image: image_url("white.jpg");
   }
 }
 
 @media screen and (max-width: 480px) {
   .home-section{
-    background-image: url(../images/white.png);
+    background-image: image_url("white.jpg");
   }
   h1 {
     font-size: 40px;

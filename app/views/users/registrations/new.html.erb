@@ -9,8 +9,8 @@
 </style>
 <div class="container-fluid">
   <div class="row justify-content-center align-items-center" style="height: 100vh;">
-    <div class=" mx-auto">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <div class="mx-auto center-form col-md-6">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class=>"form"}) do |f| %>
         <h2>إنشاء حساب</h2>
         <%= render "users/shared/error_messages", resource: resource %>
         <div class="form-group fullname">
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group password">
           <label for="user_password">كلمة المرور</label>
-          <%= f.password_field :password, placeholder: "كلمة المرور" %>
+          <%= f.password_field :password, placeholder: "كلمة المرور", class: "pass" %>
           <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
           <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %>  محارف على أﻷقل)</em>
@@ -44,11 +44,7 @@
         <div class="form-group submit-btn">
           <%= f.submit "انشئ حسابي" %>
         </div>
-        <div class="form-group" style="top: 6px;">
-          <span>هل تملك حساب ؟ 
-            <%= link_to "تسجيل الدخول", new_user_session_path, style: "color: #9b3c27;" %>
-          </span>
-        </div>
+        <%= render "users/shared/links" %>
       <% end %>
     </div>
   </div>
