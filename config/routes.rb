@@ -20,12 +20,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users do
-    member do
-      patch 'lock'
-      patch 'unlock'
-    end
-  end
+  
   
 
   #Devise Routes
@@ -42,6 +37,8 @@ Rails.application.routes.draw do
     get '/admins/sign_out' => 'devise/sessions#destroy'
     get '/admin/dashboard' => 'admin_actions#dashboard'
     get '/admin/user_list' => 'admin_actions#user_list'
+    post '/admin/ban/:id', to: 'admin_actions#ban_user', as: 'lock_user'
+    post '/admin/unban/:id', to: 'admin_actions#unban_user', as: 'unlock_user'
 
   end
 

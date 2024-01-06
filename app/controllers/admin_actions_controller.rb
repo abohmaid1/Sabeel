@@ -7,10 +7,22 @@ class AdminActionsController < ApplicationController
     end
     
     def user_list
-        @users = User.all
+        @users = User.all.sort
     end
 
     def meeting_place_request_list
-        @requests = CreateMeetingPlaceRequest.all
+        requests = CreateMeetingPlaceRequest.all
+    end
+
+    def ban_user
+        user = User.find(params[:id])
+        user.lock_access!
+        redirect_to admin_user_list_path, notice: "تم أيقاف حساب المستخدم لمدة ثلاثة أيام"
+    end
+
+    def unban_user
+        user = User.find(params[:id])
+        user.unlock_access!
+        redirect_to admin_user_list_path, notice: "تم تفعيل الحساب"
     end
 end
