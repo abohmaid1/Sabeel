@@ -23,7 +23,7 @@ class CreatingMeetingPlaceRequestsController < ApplicationController
   # POST /creating_meeting_place_requests or /creating_meeting_place_requests.json
   def create
     @creating_meeting_place_request = CreatingMeetingPlaceRequest.new(creating_meeting_place_request_params)
-
+    
     respond_to do |format|
       if @creating_meeting_place_request.save
         format.html { redirect_to root_path, notice: "Request has beed sent, we will mail you when accepted, Thank you!" }

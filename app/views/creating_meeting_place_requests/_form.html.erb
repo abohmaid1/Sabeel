@@ -18,7 +18,7 @@
           <%= form.label :"البريد الإلكتروني" %>
           <%= form.text_field :email %>
         </div>
-        <div>
+        <div class="form-group" >
           <%= form.label :"اسم المحل التجاري" %>
           <%= form.text_field :stor_name %>
         </div>
@@ -26,19 +26,19 @@
           <%= form.label :"اسم المالك الثلاثي" %>
           <%= form.text_field :owner_name %>
         </div>
-        <div class="form-group">
+        <div class="form-group contract">
           <%= form.label :"صورة عقد المحل التجاري"%>
-          <%= form.file_field :contracts, style: "border: 0px"%>
+          <%= form.file_field :contract, style: "border: 0px"%>
         </div >
-        <div class="form-group city">
+        <div class="form-group">
           <%= form.label :"محافظتك" %>
           <%= form.collection_select(:governate, SupportedGovernate.all, :id, :name) %>
         </div>
-        <div>
+        <div class="form-group city">
           <%= form.label :"اسم المدينة" %>
           <%= form.text_field :city_name %>
         </div>
-        <div>
+        <div class="form-group location-details">
           <%= form.label :"تفاصيل المكان" %>
           <%= form.text_field :location_details %>
         </div>
@@ -49,3 +49,4 @@
     </div>
   </div>
 </div>
+<%= javascript_include_tag('meeting_requests.js') %>

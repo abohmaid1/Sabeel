@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     get '/admins/sign_out' => 'devise/sessions#destroy'
     get '/admin/dashboard' => 'admin_actions#dashboard'
     get '/admin/user_list' => 'admin_actions#user_list'
+    get '/admin/user_meeting_place_requests' => 'admin_actions#meeting_place_request_list', as: "admin_MPR"
     post '/admin/ban/:id', to: 'admin_actions#ban_user', as: 'lock_user'
     post '/admin/unban/:id', to: 'admin_actions#unban_user', as: 'unlock_user'
 

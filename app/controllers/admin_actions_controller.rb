@@ -11,7 +11,7 @@ class AdminActionsController < ApplicationController
     end
 
     def meeting_place_request_list
-        requests = CreateMeetingPlaceRequest.all
+        @MPA = CreatingMeetingPlaceRequest.all
     end
 
     def ban_user

@@ -1,0 +1,9 @@
+<h1>Creating meeting place requests</h1>
+<div id="creating_meeting_place_requests">
+  <%  @MPA.each do |creating_meeting_place_request| %>
+    <%= render creating_meeting_place_request %>
+    <p>
+      <%= link_to "Show this creating meeting place request", creating_meeting_place_request %>
+    </p>
+  <% end %>
+</div>

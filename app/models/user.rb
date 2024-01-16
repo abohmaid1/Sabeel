@@ -10,10 +10,11 @@ class User < ApplicationRecord
 
 
   has_many :user_have_books, dependent: :destroy
-  has_many :supported_governates
+  has_one :supported_governates
   has_many :books, through: :user_have_books
 
   enum role: [:special, :reader, :writer]
+  
   after_initialize :set_default_role, :if => :new_record?
   def set_default_role
     self.role ||= :reader

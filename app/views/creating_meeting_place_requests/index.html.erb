@@ -1,7 +1,5 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Creating meeting place requests</h1>
-
+<h1></h1>
 <div id="creating_meeting_place_requests">
   <% @creating_meeting_place_requests.each do |creating_meeting_place_request| %>
     <%= render creating_meeting_place_request %>
@@ -10,5 +8,4 @@
     </p>
   <% end %>
 </div>
-
 <%= link_to "New creating meeting place request", new_creating_meeting_place_request_path %>
