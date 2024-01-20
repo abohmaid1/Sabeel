@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
 
   has_many :user_have_books, dependent: :destroy
-  has_one :supported_governates
+  belongs_to :supported_governate, foreign_key: :location, class_name: 'SupportedGovernate'
   has_many :books, through: :user_have_books
 
   enum role: [:special, :reader, :writer]

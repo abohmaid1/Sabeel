@@ -26,7 +26,7 @@ class CreatingMeetingPlaceRequestsController < ApplicationController
     
     respond_to do |format|
       if @creating_meeting_place_request.save
-        format.html { redirect_to root_path, notice: "Request has beed sent, we will mail you when accepted, Thank you!" }
+        format.html { redirect_to root_path, notice: "تم ارسال طلبك لتتم معالجته، سيتم أشعارك على البريد الالكتروني بحالة الطلب" }
         format.json { render :show, status: :created, location: @creating_meeting_place_request }
       else
         format.html { render :new, status: :unprocessable_entity }

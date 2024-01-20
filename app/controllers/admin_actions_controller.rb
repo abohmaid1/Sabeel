@@ -3,7 +3,8 @@ class AdminActionsController < ApplicationController
     before_action :authenticate_admin! ,unless: :user_signed_in?
     
     def dashboard
-        @user_counts = User.count
+        @user_count = User.count
+        @books_count = Book.count
     end
     
     def user_list
@@ -11,7 +12,7 @@ class AdminActionsController < ApplicationController
     end
 
     def meeting_place_request_list
-        @MPA = CreatingMeetingPlaceRequest.all
+        @MPR = CreatingMeetingPlaceRequest.all
     end
 
     def ban_user

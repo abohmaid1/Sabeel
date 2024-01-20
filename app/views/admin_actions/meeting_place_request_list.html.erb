@@ -1,9 +1,46 @@
-<h1>Creating meeting place requests</h1>
-<div id="creating_meeting_place_requests">
-  <%  @MPA.each do |creating_meeting_place_request| %>
-    <%= render creating_meeting_place_request %>
-    <p>
-      <%= link_to "Show this creating meeting place request", creating_meeting_place_request %>
-    </p>
-  <% end %>
+<div class="container mt-4">
+  <table class="table table-hover table-bordered">
+    <thead class="table-dark text-center">
+      <tr>
+        <th>الرقم</th>
+        <th>اسم المحل التجاري</th>
+        <th>البريد الإلكتروني</th>
+        <th>اسم المالك</th>
+        <th>العقد</th>
+        <th>المحافظة</th>
+        <th>المدينة</th>
+        <th>تفاصيل الموقع</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <% @MPR.each do |creating_meeting_place_request| %>
+        <tr>
+          <td><%= creating_meeting_place_request.id %></td>
+          <td><%= creating_meeting_place_request.stor_name %></td>
+          <td><%= creating_meeting_place_request.email %></td>
+          <td><%= creating_meeting_place_request.owner_name %></td>
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contractModal">
+              عرض العقد
+            </button>
+          </td>
+          <td><%= creating_meeting_place_request.governate %></td>
+          <td><%= creating_meeting_place_request.city_name %></td>
+          <td><%= creating_meeting_place_request.location_details %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
+<!-- Modal -->
+<% @MPR.each do |creating_meeting_place_request| %>
+  <div class="modal fade" id="contractModal" tabindex="-1" role="dialog" aria-labelledby="contractModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <%= image_tag(creating_meeting_place_request.contract, style: "width: 100%;") %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -7,7 +7,7 @@
         <th>البريد الإلكتروني</th>
         <th>عدد الكتب المسجلة</th>
         <th>الموقع</th>
-        <th>حالى الحساب</th>
+        <th>حالة الحساب</th>
       </tr>
     </thead>
     <tbody class="text-center">
@@ -21,7 +21,7 @@
             <td><%= user.username %></td>
             <td><%= user.email %></td>
             <td><%= user.books.count %></td>
-            <td><%= user.location.name %></td>
+            <td><%= user.supported_governate.name %></td>
             <% if user.access_locked? %>
               <td> <%= button_to "Unlock Account", unlock_user_path(user), method: :post %></td>
             <% else %>
