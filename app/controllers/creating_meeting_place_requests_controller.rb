@@ -13,6 +13,7 @@ class CreatingMeetingPlaceRequestsController < ApplicationController
 
   # GET /creating_meeting_place_requests/new
   def new
+    @disable_nav = true
     @creating_meeting_place_request = CreatingMeetingPlaceRequest.new
   end
 
