@@ -1,14 +1,21 @@
-<div class="card" style="width: 18rem;">
-  <% if !book.google_book_picture_tag.blank? %>
-    <%= image_tag(book.google_book_picture_tag, style:"width: 150px;", class: "card-img-top") %>
-  <% end %>
-  <div class="card-body">
-    <h5 class="card-title"><%= book.title %></h5>
-    <p class="card-text">اسم الكاتب</p>
-    <a href="#" class="btn btn-primary">تفاصيل</a>
-    <div>
-      <%= link_to "Edit this book", edit_book_path(book), class:"btn btn-warning" %>
-      <%= button_to "remove this book", remove_book_from_user_books_path(:id => book.id), method: :delete,class: "btn btn-danger", data: {turbo_confirm: "Are you sure?"}%>
+<div class="book read">
+  <div class="cover">
+    <% if !book.google_book_picture_tag.blank? %>
+      <%= image_tag(book.google_book_picture_tag) %>
+    <% else %>
+      <p >
+        لا يوجد صورة لعرضها
+      </p>
+      <i class="bi bi-emoji-frown-fill"></i>
+    <% end %>
+  </div>
+  <div class="description">
+    <div class="row">
+      <p class="title"><%= book.title %><br>
+      </p>
+    </div>
+    <div class="row">
+      <%= button_to "إزالة الكتاب من مكتبتي", remove_book_from_user_books_path(:id => book.id), method: :delete,class: "btn btn-danger Custom-Button", data: {turbo_confirm: "هل انت متأكد من إزالة الكتاب ؟"}%>
     </div>
   </div>
 </div>

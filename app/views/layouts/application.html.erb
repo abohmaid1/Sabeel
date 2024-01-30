@@ -23,5 +23,6 @@
         <%=render "partial/userNavbar", unless: @disable_nav %>
       <% end %>
       <%= yield %>
+      <%= render "partial/footer", unless: @disable_nav %>
     </body>
   </html>

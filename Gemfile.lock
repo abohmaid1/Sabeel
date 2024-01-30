@@ -137,6 +137,10 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.6.3)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
@@ -225,8 +229,6 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.6)
-    route_downcaser (1.2.3)
-      activesupport (>= 3.2)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -295,11 +297,11 @@ DEPENDENCIES
   httparty (~> 0.21.0)
   importmap-rails
   jbuilder
+  letter_opener
   openlibrary
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.7)
-  route_downcaser
   selenium-webdriver
   sprockets-rails
   stimulus-rails

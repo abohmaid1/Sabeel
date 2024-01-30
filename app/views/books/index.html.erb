@@ -1,50 +1,57 @@
-<style>
-  img{
-    width: 10rem;
-  }
-</style>
-<h2>مكتبتي</h2>
-<div class="container mt-4">
-  <% @books.each do |book| %>
-    <%= render book %>
-  <% end %>
-</div>
-<%# link_to "New book", new_book_path, class: "btn btn-danger" %>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
-  أضف كتابا
-</button>.
-<!-- Modal -->
-<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content d-flex">
-      <div class="modal-header justify-content-center align-items-center">
-        <%# <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> %>
-        <h5 class="modal-title" id="modalTitleId">البحث عن كتاب</h5>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <%= render "search_bar", book: @book %>
-          </div>
-          <div id="search_results">
-            <p>
-              ستظهر نتائج البحث هنا
-            </p>
-          </div>
-          <br>
+<%= stylesheet_link_tag "library"%>
+<%= stylesheet_link_tag "search_and_resaults"%>
+<div class="large-th">
+  <div class="container">
+    <div class="top-bar">
+      <% unless @books == [] %>
+        <button type="button"  data-bs-toggle="modal" data-bs-target="#modalId">
+          أضف كتاباً
+        </button>
+      <% end %>
+    </div>
+    <div class="list">
+      <% unless @books == [] %>
+        <% @books.each do |book| %>
+          <%= render book %>
+        <% end %>
+      <% else %>
+        <div class="empty-library">
+          <p>لم تقم بإضافة أي كتاب إلى مكتبتك، قم بإضافة البعض ليتاح لك التبادل.</p>
+          <button type="button"  data-bs-toggle="modal" data-bs-target="#modalId">
+            أضف كتاباً
+          </button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+      <% end %>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content d-flex">
+        <div class="modal-header justify-content-center align-items-center">
+          <h5 class="modal-title" id="modalTitleId">البحث عن كتاب</h5>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <%= render "search_bar", book: @book %>
+            <div id="search_results">
+              <p>
+                ستظهر نتائج البحث هنا
+              </p>
+            </div>
+            <br>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">إلغاء</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<script>
-  var modalId = document.getElementById('modalId');
-  modalId.addEventListener('show.bs.modal', function (event) {
-      let button = event.relatedTarget;
-      let recipient = button.getAttribute('data-bs-whatever');
-  });
-</script>
+  <script>
+    var modalId = document.getElementById('modalId');
+    modalId.addEventListener('show.bs.modal', function (event) {
+        let button = event.relatedTarget;
+        let recipient = button.getAttribute('data-bs-whatever');
+    });
+  </script>

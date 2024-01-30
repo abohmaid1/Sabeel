@@ -9,13 +9,17 @@ form {
     padding:30px 20px;
     margin:auto;
     position: relative;
-    top: 0px;
+    top: 5%;
     left: 555px;
     right: 0;
-    background:  var(--primary-color);
+    // background:  var(--primary-color);
     border-radius: 20px;
   }
-  
+  .form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   form h2 {
     font-size: 27px;
     text-align: center;

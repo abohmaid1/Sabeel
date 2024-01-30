@@ -6,7 +6,7 @@
     <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
       <li class="nav-item">
         <%= link_to(root_path, class: "nav-link px-sm-0 px-2") do %>
-          <%= content_tag(:i, "", class: "fs-5 bi-house") %>
+          <%= content_tag(:i, "", class: "fs-5 bi-house-fill") %>
           <span class="ms-1 d-none d-sm-inline">الرئيسية</span>
         <% end %>
       </li>
@@ -29,28 +29,19 @@
           </li>
           <li>
             <%= link_to("#", class: "dropdown-item") do %>
-              <%= content_tag(:i, "", class: "fs-5 bi-table") %>
+              <%= content_tag(:i, "", class: "fs-5 bi-pen-fill") %>
               <span class="ms-1 d-none d-sm-inline">طلبات ترقية كاتب</span>
             <% end %>
           </li>
         </ul>
       </li>
-      <li>
-        <a href="#" class="nav-link px-sm-0 px-2">
-          <i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">Products</span></a>
-      </li>
-      <li>
-        <a href="#" class="nav-link px-sm-0 px-2">
-          <i class="fs-5 bi-people"></i><span class="ms-1 d-none d-sm-inline">Customers</span> </a>
-      </li>
     </ul>
     <div class="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="d-none d-sm-inline mx-1">Joe</span>
+        <i class="fs-5 bi-gear-fill"></i>
+        <span class="d-none d-sm-inline mx-1">الإعدادات</span>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
         <li><%= link_to "تغيير كلمة السر", edit_admin_registration_path ,class: "dropdown-item" %></li>
         <li>
           <hr class="dropdown-divider">

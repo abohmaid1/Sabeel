@@ -37,6 +37,7 @@ end
 
 group :development do
   gem "web-console"
+  gem 'letter_opener'
 end
 
 group :test do
@@ -51,5 +52,4 @@ gem "googlebooks", "~> 0.0.9"
 gem 'openlibrary'
 gem "httparty", "~> 0.21.0"
 gem "http", "~> 5.1"
-
 gem "bootstrap", "~> 5.3"

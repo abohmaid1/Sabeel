@@ -19,9 +19,6 @@ Rails.application.routes.draw do
       delete :remove_book_from_user
     end
   end
-  
-  
-  
 
   #Devise Routes
   devise_for :users, controllers: {
@@ -33,6 +30,10 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
+  devise_scope :meeting_place do
+    get '/meeting_places/sign_out' => 'devise/sessions#destroy'
+    get '/meeting_places/index' => 'meeting_places#Main'
+  end
   devise_scope :admin do
     get '/admins/sign_out' => 'devise/sessions#destroy'
     get '/admin/dashboard' => 'admin_actions#dashboard'
@@ -40,7 +41,7 @@ Rails.application.routes.draw do
     get '/admin/user_meeting_place_requests' => 'admin_actions#meeting_place_request_list', as: "admin_MPR"
     post '/admin/ban/:id', to: 'admin_actions#ban_user', as: 'lock_user'
     post '/admin/unban/:id', to: 'admin_actions#unban_user', as: 'unlock_user'
-
+    post '/admin/createMP/:id', to: 'admin_actions#create_meeting_place_profile', as: 'CreateMP'
   end
 
   devise_for :admins, controllers: {

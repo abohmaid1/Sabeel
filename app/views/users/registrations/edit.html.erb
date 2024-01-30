@@ -1,8 +1,8 @@
 <%= stylesheet_link_tag "bookshelf"%>
 <%=  stylesheet_link_tag "forms" %>
 <div class="container">
-  <div class="row min-vh-100">
-    <div class="col-md-6">
+  <div class="d-flex justify-content-evenly flex-wrap min-vh-100">
+    <div class="col-md-6 form-container">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <h2>تعديل بياناتي</h2>
         <%= render "devise/shared/error_messages", resource: resource %>

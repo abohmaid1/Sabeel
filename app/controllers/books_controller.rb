@@ -56,6 +56,7 @@ class BooksController < ApplicationController
   def search
     @ResaultFlag = true
     if params[:title_search].present?
+      @enterd_word = params[:title_search]
       replacements = {' ' => '+'}
       @books = Book.filter_by_title(params[:title_search])
       @searched_word = (params[:title_search].strip).gsub(Regexp.union(replacements.keys), replacements)  
@@ -82,7 +83,7 @@ class BooksController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.update("search_results", 
-          partial: "books/search_results", locals: {books: @books,ResaultFlag: @ResaultFlag, google_books: @google_books, searched_word: @searched_word ,search_string: params[:title_search]})
+          partial: "books/search_results", locals: {books: @books,ResaultFlag: @ResaultFlag, google_books: @google_books})
         end
       end 
     end
@@ -91,7 +92,7 @@ class BooksController < ApplicationController
     def remove_book_from_user
       respond_to do |format|
         if current_user.books.delete(Book.find(params[:id]))
-        format.html { redirect_to library_url, notice: "Book removed" }
+        format.html { redirect_to library_url, alert: "تم إزالة الكتاب بنجاح" }
         format.json { render :library, status: :ok}
       else
         format.html { render :library, status: :unprocessable_entity }
@@ -106,9 +107,9 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @check.blank?
         @book.users << current_user
-        format.html { redirect_to library_url, notice: "Book Added" }
+        format.html { redirect_to library_url, notice: "تم إضافة الكتاب بنجاح" }
       else
-        format.html { redirect_to library_url, alert: "Book Already in your library" }
+        format.html { redirect_to library_url, alert: "تم إضافة الكتاب إلى مكتبتك مسبقاً" }
       end
     end
   end
@@ -122,9 +123,9 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.save!
         @book.users << current_user
-        format.html { redirect_to library_url, notice: "Book Added" }
+        format.html { redirect_to library_url, notice: "تم إضافة الكتاب بنجاح"}
       else
-        format.html { redirect_to library_url, alert: "Book Already in your library" }
+        format.html { redirect_to library_url, alert: "تم إضافة الكتاب إلى مكتبتك مسبقاً" }
       end
     end
   end

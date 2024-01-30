@@ -1,20 +1,29 @@
-<!-- Show local database Results  -->
-<div class="row">
-  <% if @books != [] %>
-    <% @books.each do |book| %>
-      <div class="container">
-        <%= book.title %> ,
+<% if @books != [] %>
+  <% @books.each do |book| %>
+    <div class="col-sm-12 col-md-12 col-lg-12 d-flex">
+      <div class="searched-cover">
         <% if !book.google_book_picture_tag.blank? %>
           <%= image_tag(book.google_book_picture_tag) %>
         <% end %>
-        <%= button_to "Add to my Library", add_book_to_user_books_path(:id => book.id), method: :post %>
       </div>
-      <hr />
-    <% end %>
-  <% else %>
-    <% if @google_books != [] %>
-      <% @google_books.each do |book| %>
-        <div class="col-sm-12 col-md-12 col-lg-12 d-flex">
+      <div class="searched-description">
+        <div class="row">
+          <p class="title"><%= book.title %><br>
+          </p>
+        </div>
+        <div class="row">
+          <%= button_to "أضف إلى مكتبتي", add_book_to_user_books_path(:id => book.id), method: :post ,class: "btn btn-success Custom-Button"%>
+        </div>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+</div>
+<% else %>
+  <% if @google_books != [] %>
+    <% @google_books.each do |book| %>
+      <div class="col-sm-12 col-md-12 col-lg-12 d-flex">
+        <div class="searched-cover">
           <% if book["imageLinks"].present? %>
             <% @cover_tag = book["imageLinks"]["thumbnail"] %>
             <%= image_tag(book["imageLinks"]["thumbnail"]) %>
@@ -22,21 +31,20 @@
             <% @cover_tag = "" %>
             لا يوجد صورة لعرضها
           <% end %>
-          <h5>العنوان</h5>
-          <br>
-          <p class="text-truncate"> <%= book["title"] %> </p>
-          <p>المؤلفين</p>
-          <%= book["authors"] %>
-          <br>
         </div>
-        <%= link_to "أضف إلى مكتبتي", add_book_to_database_books_path(title: book["title"], description: book["description"], cover_tag: @cover_tag), method: :get, class:"btn btn-success" %>
-      <% end %>
+        <div class="searched-description">
+          <div class="row">
+            <p class="title"> <%= book["title"] %> </p>
+          </div>
+          <div class="row">
+            <%= link_to "أضف إلى مكتبتي", add_book_to_database_books_path(title: book["title"], description: book["description"], cover_tag: @cover_tag), method: :get, class:"btn btn-success Custom-Button" %>
+          </div>
+        </div>
+      </div>
+      <hr>
     <% end %>
   <% end %>
-  <!-- Show Google Books Results -->
-  <% if @books == [] %>
-  <% end %>
-  <% if !@ResaultFlag %>
-    <p>No Resault about <%= @searched_word %></p>
-  <% end %>
-</div>
+<% end %>
+<% if !@ResaultFlag %>
+  <p>لا يوجد نتائج عن <%= @enterd_word %></p>
+<% end %>

@@ -1,0 +1,6 @@
+<% if meeting_place_signed_in? %>
+  <li><%= link_to "تسجيل الخروج", destroy_meeting_place_session_path %></li>
+  <li><%= link_to "تعديل البيانات", edit_meeting_place_registration_path %></li>
+<% end %>
+<p><%= @x %></p>
+z

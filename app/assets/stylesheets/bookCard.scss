@@ -1,0 +1,49 @@
+.book {
+	display: inline-block;
+	width: 230px;
+	height: 390px;
+	box-shadow: 0 0 20px #aaa;
+	margin: 25px;
+	padding: 10px 10px 0 10px;
+	vertical-align: top;
+	transition: height 1s;
+	text-overflow: ellipsis;
+}
+.cover {
+	border: 2px solid gray;
+	height: 80%;
+	width: 20%;
+	overflow: hidden;
+}
+
+.cover img {
+	width: 25px;
+}
+.book p {
+	margin-top: 12px;
+	font-size: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.book .author {
+	font-size: 15px;
+}
+@media (max-width: 941px) {
+	.container {
+		max-width: 700px;
+	}
+	.book {
+		margin: 49px;
+	}
+}
+@media (max-width: 730px) {
+	.book {
+		display: block;
+		margin: 0 auto;
+		margin-top: 50px;
+	}
+	.cover {
+	
+	}
+}
