@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :book_requests
   
   resources :creating_meeting_place_requests
   
@@ -11,6 +12,11 @@ Rails.application.routes.draw do
   
   #Books Routes
   get 'library', :to => 'books#index'
+  get 'exchange_library', :to => 'books#exchange_library'
+  get 'check_requests', :to => 'book_requests#arrived_book_request', :as => "show_request"
+  get 'accepted_request', :to => 'book_requests#accept_meeting', :as => "accepted_meeting"
+  get 'rejected_request', :to => 'book_requests#reject_meeting', :as => "rejected_meeting"
+
   resources :books, :except => [:index, :delete] do
     collection do
       post :search

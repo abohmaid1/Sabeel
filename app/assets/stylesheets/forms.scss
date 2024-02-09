@@ -5,14 +5,13 @@ body{
     font-family: 'Marhey', sans-serif;
   }
 form {
-    width: 400px;
+    width: 60%;
     padding:30px 20px;
     margin:auto;
     position: relative;
     top: 5%;
     left: 555px;
     right: 0;
-    // background:  var(--primary-color);
     border-radius: 20px;
   }
   .form-container{
@@ -111,4 +110,11 @@ form {
     width: 20px;
     height: 20px;
     accent-color: #9b3c27;
+  }
+
+  @media screen and (max-width: 940px) {
+    form{
+      width: 100%;
+    }
+
   }

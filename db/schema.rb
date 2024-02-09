@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_06_141942) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_07_195106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_141942) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "book_requests", force: :cascade do |t|
+    t.bigint "requester_id_id", null: false
+    t.bigint "requested_book_id_id", null: false
+    t.bigint "meeting_place_id_id"
+    t.datetime "meeting_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "state"
+    t.index ["meeting_place_id_id"], name: "index_book_requests_on_meeting_place_id_id"
+    t.index ["requested_book_id_id"], name: "index_book_requests_on_requested_book_id_id"
+    t.index ["requester_id_id"], name: "index_book_requests_on_requester_id_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.string "discription"
@@ -91,6 +104,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_141942) do
     t.index ["email"], name: "index_meeting_places_on_email", unique: true
     t.index ["governate"], name: "index_meeting_places_on_governate"
     t.index ["reset_password_token"], name: "index_meeting_places_on_reset_password_token", unique: true
+  end
+
+  create_table "request_logs", force: :cascade do |t|
+    t.bigint "first_side_id", null: false
+    t.bigint "second_side_id", null: false
+    t.bigint "first_side_book_id", null: false
+    t.bigint "second_side_book_id", null: false
+    t.boolean "first_side_presence"
+    t.boolean "second_side_presence"
+    t.bigint "meeting_place_id", null: false
+    t.datetime "meeting_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["first_side_book_id"], name: "index_request_logs_on_first_side_book_id"
+    t.index ["first_side_id"], name: "index_request_logs_on_first_side_id"
+    t.index ["meeting_place_id"], name: "index_request_logs_on_meeting_place_id"
+    t.index ["second_side_book_id"], name: "index_request_logs_on_second_side_book_id"
+    t.index ["second_side_id"], name: "index_request_logs_on_second_side_id"
   end
 
   create_table "supported_governates", force: :cascade do |t|
@@ -133,8 +164,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_141942) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "book_requests", "meeting_places", column: "meeting_place_id_id"
+  add_foreign_key "book_requests", "user_have_books", column: "requested_book_id_id"
+  add_foreign_key "book_requests", "users", column: "requester_id_id"
   add_foreign_key "creating_meeting_place_requests", "supported_governates", column: "governate"
   add_foreign_key "meeting_places", "supported_governates", column: "governate"
+  add_foreign_key "request_logs", "books", column: "first_side_book_id"
+  add_foreign_key "request_logs", "books", column: "second_side_book_id"
+  add_foreign_key "request_logs", "meeting_places"
+  add_foreign_key "request_logs", "users", column: "first_side_id"
+  add_foreign_key "request_logs", "users", column: "second_side_id"
   add_foreign_key "user_have_books", "books"
   add_foreign_key "user_have_books", "users"
   add_foreign_key "users", "supported_governates", column: "location"

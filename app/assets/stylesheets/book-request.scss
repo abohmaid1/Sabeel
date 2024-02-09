@@ -1,0 +1,15 @@
+.book{
+    background-color: white;
+}
+.request-book{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.description{
+    min-width: 50%;
+    font-size: small !important;
+    word-wrap: break-word;
+    white-space: normal !important;
+    height: fit-content !important;
+}

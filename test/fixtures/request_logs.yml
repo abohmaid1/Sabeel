@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_side: one
+  second_side: one
+  first_side_book: one
+  second_side_book: one
+  first_side_presence: false
+  second_side_presence: false
+  meeting_place: one
+  meeting_time: 2024-02-07 22:51:07
+
+two:
+  first_side: two
+  second_side: two
+  first_side_book: two
+  second_side_book: two
+  first_side_presence: false
+  second_side_presence: false
+  meeting_place: two
+  meeting_time: 2024-02-07 22:51:07

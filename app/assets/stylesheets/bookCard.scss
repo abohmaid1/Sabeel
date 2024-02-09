@@ -9,6 +9,11 @@
 	transition: height 1s;
 	text-overflow: ellipsis;
 }
+
+.book:hover {
+	display: none;
+}
+
 .cover {
 	border: 2px solid gray;
 	height: 80%;

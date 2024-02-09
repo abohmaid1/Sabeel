@@ -37,9 +37,15 @@
   --font-weight-bold:             700;
 }
 
+
+.field_with_errors {
+  color: red;
+}
 body{
+  min-height: 120%;
+  min-width: 100%;
   font-family: 'Marhey', sans-serif;
-  }
+}
 input {
   font-family: 'Marhey', sans-serif;
 }

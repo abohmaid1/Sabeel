@@ -25,7 +25,7 @@
         <% end %>
         <% unless current_user.books.count == 0 %>
           <li class="nav-item">
-            <%= link_to "مكتبة التبادل ", edit_user_registration_path, class: "nav-link" %>
+            <%= link_to "مكتبة التبادل ", exchange_library_path	, class: "nav-link" %>
           </li>
         <% end %>
         <li class="nav-item dropdown">
@@ -35,6 +35,9 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">حسابي</a>
           <ul class="dropdown-menu dropdown-menu-light"
                                 aria-labelledby="navbarLightDropdownMenuLink">
+            <li>
+              <%= link_to "طلبات التبادل المرسلة", book_requests_path, class: "dropdown-item" %>
+            </li>
             <li>
               <%= link_to "حسابي", edit_user_registration_path, class: "dropdown-item" %>
             </li>

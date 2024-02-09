@@ -1,29 +1,50 @@
 require 'googlebooks'
 require 'open-uri'
 
-class BooksController < ApplicationController
+class BooksController < ApplicationController 
   before_action :set_book, only: %i[ show edit destroy ]
   before_action :authenticate_user!
 
-  # GET /books or /books.json
+  # مكتبة المستخدم
   def index
-    @books = current_user.books
+    puts current_user.id
+    @books = Book.find_by_sql(
+      "
+      SELECT user_have_books.id AS user_have_book_id, books.*, COUNT(CASE WHEN book_requests.state != 3 THEN 1 END) AS request_count
+      FROM books 
+      JOIN user_have_books ON books.id = user_have_books.book_id 
+      LEFT JOIN book_requests ON user_have_books.id = book_requests.requested_book_id_id
+      WHERE user_have_books.user_id = #{current_user.id}
+      GROUP BY user_have_books.id, books.id;
+      "
+    )
   end
-
-  # GET /books/1 or /books/1.json
+  # مكتبة التبادل
+  def exchange_library
+    @books = UserHaveBook.select(
+      [
+        UserHaveBook.arel_table[:id], :user_id, :book_id, Book.arel_table[:title], Book.arel_table[:google_book_picture_tag]
+      ]
+    ).joins(
+      UserHaveBook.arel_table.join(Book.arel_table).on(
+        UserHaveBook.arel_table[:book_id].eq(Book.arel_table[:id])
+      ).join_sources
+    )
+    @books = @books.reject { |book| book.user_id == current_user.id }
+    if current_user.book_requests.count == current_user.books.count
+      @uable_to_request = true
+    end
+  end
+  
   def show
   end
 
-  # GET /books/new
   def new
     @book = Book.new
   end
 
-  # GET /books/1/edit
   def edit
   end
-
-  # POST /books or /books.json
 
   def create
     @book = Book.new(book_params)
@@ -38,8 +59,7 @@ class BooksController < ApplicationController
       end
     end
   end
-  
-  # PATCH/PUT /books/1 or /books/1.json
+
   def update
     respond_to do |format|
       if @book.update(book_params)
@@ -53,6 +73,7 @@ class BooksController < ApplicationController
     end
   end
 
+  # عملية البخث عن الكتب
   def search
     @ResaultFlag = true
     if params[:title_search].present?

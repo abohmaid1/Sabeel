@@ -1,0 +1,18 @@
+<%= button_to(new_book_request_path, params: {book: book.id}, method: :get, class: 'book book-button exchange') do %>
+  <div class="cover">
+    <% if !book.google_book_picture_tag.blank? %>
+      <%= image_tag(book.google_book_picture_tag) %>
+    <% else %>
+      <p>
+        لا يوجد صورة لعرضها
+      </p>
+      <i class="bi bi-emoji-frown-fill"></i>
+    <% end %>
+  </div>
+  <div class="description">
+    <div class="row">
+      <p class="title"><%= book.title %><br>
+      </p>
+    </div>
+  </div>
+<% end %>

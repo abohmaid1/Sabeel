@@ -6,7 +6,6 @@ class MeetingPlace::SessionsController < Devise::SessionsController
   #GET /resource/sign_in
   def new
     @disable_nav = true
-    
     super
   end
 

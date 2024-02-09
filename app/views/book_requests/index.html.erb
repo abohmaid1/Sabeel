@@ -1,0 +1,84 @@
+<%= stylesheet_link_tag "book-request"%>
+<%= stylesheet_link_tag "containers"%>
+<div class="table-container d-flex justify-content-evenly flex-wrap">
+  <% if !@book_requests.blank? %>
+    <div class="table-responsive rounded ">
+      <table class="table text-center align-middle border-black shadow-lg table-bordered table-hover table-striped">
+        <thead class="table-dark text-center">
+          <tr>
+            <th><i class="bi bi-book ps-2"></i> الكتاب</th>
+            <th> <i class="bi bi-geo-alt ps-2"></i>الملتقى المقترح </th>
+            <th><i class="bi bi-clock-history ps-2"></i>الوقت المقترح</th>
+            <th><i class="bi bi-eye ps-2"></i>الحالة</th>
+            <th>إلغاء الطلب</th>
+          </tr>
+        </thead>
+        <tbody id="book_requests">
+          <% @book_requests.each do |book_request| %>
+            <% if book_request.state == 'مرفوض' %>
+              <tr id="<%= dom_id book_request %>" class="table-danger">
+              <% else %>
+                <tr id="<%= dom_id book_request %>" class="table-warning">
+                <% end %>
+                <td>
+                  <div class="d-flex flex-xl-row flex-column justify-content-around align-items-center" >
+                    <div>
+                      <div class="cover d-flex justify-content-center">
+                        <% if !book_request.google_book_picture_tag.blank? %>
+                          <%= image_tag(book_request.google_book_picture_tag) %>
+                        <% else %>
+                          <p >
+                            لا يوجد صورة لعرضها
+                          </p>
+                          <i class="bi bi-emoji-frown-fill"></i>
+                        <% end %>
+                      </div>
+                      <div class="description">
+                        <div class="row">
+                          <p class="title text-center"><%= book_request.title %><br>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">
+                  <h4><%= book_request.governate %></h4>
+                  <h5>المدينة : <%= book_request.city_name %></h5>
+                  <h5>المكان : <%= book_request.store_name %></h5>
+                  <h6>تفاصيل الموقع : <%= book_request.location_details %></h6>
+                  <button class="btn btn-primary" onclick="openGoogleMaps('<%= book_request.city_name %>','<%=book_request.store_name %>')">عرض الموقع في الخرائط (قد يكون خاطئ)</button>
+                </td>
+                <td>
+                  <p>
+                    <%= book_request.meeting_time.to_date %>
+                    <br>
+                    <%= book_request.meeting_time.to_fs(:time) %>
+                  </p>
+                </td>
+                <td>
+                  <%= book_request.state %>
+                </td>
+                <td>
+                  <%= button_to "إلغاء الطلب", book_request, method: :delete, class: "btn btn-danger" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-library">
+        <p class="text-center mt-5">لم تقم بطلب أي كتاب ! اذهب إلى مكتبة التبادل واحصل على البعض</p>
+        <%= link_to "مكتبة التبادل", exchange_library_path,method: :get ,class: "btn btn-dark btn-lg"%>
+      </div>
+    <% end %>
+  </div>
+  <script>
+    function openGoogleMaps(city_name, storeName) {
+
+      var encodedStoreName  = encodeURIComponent(city_name + " " + storeName);
+      console.log(city_name + storeName);
+        window.open('https://www.google.com/maps/search/?q=' + encodedStoreName, '_blank');
+    }
+  </script>

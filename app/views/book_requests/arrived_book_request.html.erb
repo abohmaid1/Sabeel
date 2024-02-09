@@ -1,0 +1,76 @@
+<%= stylesheet_link_tag "forms"%>
+<%= stylesheet_link_tag "library"%>
+<%= stylesheet_link_tag "containers"%>
+<div class="page_container d-flex flex-xl-row flex-md-col mx-5 px-5">
+  <div class=" ">
+    <div class="book read">
+      <div class="cover">
+        <% if !@book.google_book_picture_tag.blank? %>
+          <%= image_tag(@book.google_book_picture_tag) %>
+        <% else %>
+          <p >
+            لا يوجد صورة لعرضها
+          </p>
+          <i class="bi bi-emoji-frown-fill"></i>
+        <% end %>
+      </div>
+      <div class="description">
+        <div class="row">
+          <p class="title"><%= @book.title %><br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow-1">
+    <div class="table-container d-flex justify-content-evenly flex-wrap">
+      <div class="table-responsive rounded ">
+        <table class="table text-center align-middle border-black shadow-lg table-bordered table-hover table-striped">
+          <thead class="table-dark text-center">
+            <tr>
+              <th><i class="bi bi-book ps-2"></i>العروض</th>
+              <th> <i class="bi bi-geo-alt ps-2"></i>الملتقى المقترح </th>
+              <th><i class="bi bi-clock-history ps-2"></i>الوقت المقترح</th>
+              <th><i class="bi bi-eye ps-2"></i>الحالة</th>
+              <th>إلغاء الطلب</th>
+            </tr>
+          </thead>
+          <tbody id="book_requests">
+            <% @requested_book_request.each do |book_request| %>
+              <% if book_request.state != "مرفوض" %>
+                <tr class="table-warning">
+                  <td>
+                    <%= form_with(model: @request_log, url: accepted_meeting_path, local: true) do |f| %>
+                      <%= f.collection_select(:second_side_book, User.find(book_request.requester_id_id).books ,:id, :title, { include_blank: 'اختر كتاب' }, required: true) %>
+                      <%= f.submit "قبول", class: "btn btn-success" %>
+                    <% end %>
+                  </td>
+                  <td class="text-center">
+                    <h4><%= book_request.governate %></h4>
+                    <h5>المدينة : <%= book_request.city_name %></h5>
+                    <h5>المكان : <%= book_request.store_name %></h5>
+                    <h6>تفاصيل الموقع : <%= book_request.location_details %></h6>
+                    <button class="btn btn-primary" onclick="openGoogleMaps('<%= book_request.city_name %>','<%=book_request.store_name %>')">عرض الموقع في الخرائط (قد يكون خاطئ)</button>
+                  </td>
+                  <td>
+                    <p>
+                      <%= book_request.meeting_time.to_date %>
+                      <br>
+                      <%= book_request.meeting_time.to_fs(:time) %>
+                    </p>
+                  </td>
+                  <td>
+                    <%= book_request.state %>
+                  </td>
+                  <td>
+                    <%= link_to "رفض الطلب", rejected_meeting_path(book_request_id: book_request.id), class: "btn btn-danger" %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
