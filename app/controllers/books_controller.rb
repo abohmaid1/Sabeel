@@ -7,10 +7,9 @@ class BooksController < ApplicationController
 
   # مكتبة المستخدم
   def index
-    puts current_user.id
     @books = Book.find_by_sql(
       "
-      SELECT user_have_books.id AS user_have_book_id, books.*, COUNT(CASE WHEN book_requests.state != 3 THEN 1 END) AS request_count
+      SELECT user_have_books.id AS user_have_book_id, books.*, COUNT(CASE WHEN book_requests.state = 0 THEN 1 END) AS request_count
       FROM books 
       JOIN user_have_books ON books.id = user_have_books.book_id 
       LEFT JOIN book_requests ON user_have_books.id = book_requests.requested_book_id_id
@@ -21,17 +20,29 @@ class BooksController < ApplicationController
   end
   # مكتبة التبادل
   def exchange_library
-    @books = UserHaveBook.select(
-      [
-        UserHaveBook.arel_table[:id], :user_id, :book_id, Book.arel_table[:title], Book.arel_table[:google_book_picture_tag]
-      ]
-    ).joins(
-      UserHaveBook.arel_table.join(Book.arel_table).on(
-        UserHaveBook.arel_table[:book_id].eq(Book.arel_table[:id])
-      ).join_sources
+    @books = UserHaveBook.find_by_sql(
+      "SELECT
+      user_have_books.id,
+      user_have_books.user_id,
+      user_have_books.book_id,
+      books.title,
+      books.google_book_picture_tag
+    FROM
+      user_have_books
+    JOIN
+      books ON user_have_books.book_id = books.id
+    LEFT JOIN
+      book_requests ON book_requests.requested_book_id_id = user_have_books.id
+    WHERE
+      book_requests.id IS NULL;"
+
     )
+    @books.each do |book|
+      puts book.id
+    end
+
     @books = @books.reject { |book| book.user_id == current_user.id }
-    if current_user.book_requests.count == current_user.books.count
+    if current_user.book_requests.where(state: 0).count == current_user.books.count
       @uable_to_request = true
     end
   end

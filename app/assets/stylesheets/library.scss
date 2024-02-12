@@ -176,15 +176,19 @@ button{
 
 }
 .counter {
-  position: absolute; /* Position the counter absolutely */
-  top: 10px; /* Adjust as needed */
-  left: 10px; /* Adjust as needed */
-  background-color: red; /* Change to red */
-  color: white; /* Text color */
-  border-radius: 50%; /* Make it a circle */
-  width: 30px; /* Adjust width to desired size */
-  height: 30px; /* Adjust height to desired size */
-  text-align: center; /* Center text horizontally */
-  line-height: 30px; /* Center text vertically */
-  z-index: 1; /* Ensure the counter is on top of other elements */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: red; 
+  color: white;
+  border-radius: 50%; 
+  width: 30px; 
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  z-index: 1; 
+}
+
+a{
+  text-decoration: none;
 }

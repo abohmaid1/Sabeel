@@ -28,12 +28,7 @@ class BookRequestsController < ApplicationController
 
   def arrived_book_request
     puts params[:book]
-    # @book = Book.find(params[:requestbook_id])
     @book = Book.find(params[:book])
-    # @requested_book_request = BookRequest.where(requested_book_id_id: params[:user_have_book_id])
-    # .joins(BookRequest.arel_table)
-
-
     @requested_book_request = BookRequest.select(
       [
         BookRequest.arel_table[Arel.star], MeetingPlace.arel_table[:store_name], MeetingPlace.arel_table[:city_name], MeetingPlace.arel_table[:location_details],  SupportedGovernate.arel_table[:name].as('governate')
@@ -70,13 +65,37 @@ class BookRequestsController < ApplicationController
   def edit
   end
 
+
+  # book accepting 
   def accept_meeting
+    @book_request = BookRequest.find(params[:request_id])
+    @second_book = UserHaveBook.find(@book_request.requested_book_id_id.to_s)
+    @first_book = UserHaveBook.where(user_id: @book_request.requester_id_id, book_id: params[:first_side_book]).first
+
+    # Log the Meeting 
+    @log_request = RequestLog.new
+    @log_request.first_side_id = @book_request.requester_id_id
+    @log_request.second_side_id = current_user.id
+    @log_request.first_side_book_id = params[:first_side_book]
+    @log_request.second_side_book_id = @second_book.book_id
+    @log_request.meeting_time = @book_request.meeting_time
+    @log_request.meeting_place_id = @book_request.meeting_place_id_id
+    
+    @book_request.destroy
+    @first_book.destroy
+    @second_book.destroy
+    @log_request.save
+    
+
+    respond_to do |format|
+        format.html { redirect_to library_url, notice: "تم قبول الطلب" }
+    end
   end
   
   def reject_meeting
     @book_request = BookRequest.find(params[:book_request_id])
     respond_to do |format|
-      if @book_request.update(state: 3)
+      if @book_request.update(state: 2)
         format.html { redirect_to root_path, alert: "تم رفض الطلب" }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -86,7 +105,6 @@ class BookRequestsController < ApplicationController
   end
 
   def create
-    
     @book_request = BookRequest.new(book_request_params)
     @book_request.requester_id_id = current_user.id
     respond_to do |format|

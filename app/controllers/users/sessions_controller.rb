@@ -21,7 +21,6 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
   def after_sign_in_path_for(user)
     library_path
   end

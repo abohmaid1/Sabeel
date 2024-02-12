@@ -22,7 +22,9 @@
       </p>
     </div>
     <div class="row">
-      <%= button_to "إزالة الكتاب من مكتبتي", remove_book_from_user_books_path(:id => book.id), method: :delete,class: "btn btn-danger Custom-Button", data: {turbo_confirm: "هل انت متأكد من إزالة الكتاب ؟"}%>
+      <% if book.request_count == 0 %>
+        <%= button_to "إزالة الكتاب من مكتبتي", remove_book_from_user_books_path(:id => book.id), method: :delete,class: "btn btn-danger Custom-Button", data: {turbo_confirm: "هل انت متأكد من إزالة الكتاب ؟"}%>
+      <% end %>
     </div>
   </div>
 </div>

@@ -41,7 +41,8 @@
                 <tr class="table-warning">
                   <td>
                     <%= form_with(model: @request_log, url: accepted_meeting_path, local: true) do |f| %>
-                      <%= f.collection_select(:second_side_book, User.find(book_request.requester_id_id).books ,:id, :title, { include_blank: 'اختر كتاب' }, required: true) %>
+                      <%= f.collection_select(:first_side_book, User.find(book_request.requester_id_id).books ,:id, :title, { include_blank: 'اختر كتاب' }, required: true) %>
+                      <%= f.hidden_field :request_id, value: book_request.id %>
                       <%= f.submit "قبول", class: "btn btn-success" %>
                     <% end %>
                   </td>
