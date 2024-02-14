@@ -27,21 +27,17 @@ class BooksController < ApplicationController
       user_have_books.book_id,
       books.title,
       books.google_book_picture_tag
-    FROM
+      FROM
       user_have_books
-    JOIN
-      books ON user_have_books.book_id = books.id
-    LEFT JOIN
-      book_requests ON book_requests.requested_book_id_id = user_have_books.id
-    WHERE
-      book_requests.id IS NULL;"
-
+      JOIN
+      books ON user_have_books.book_id = books.id"
     )
     @books.each do |book|
       puts book.id
     end
 
     @books = @books.reject { |book| book.user_id == current_user.id }
+    @books = @books.reject { |book| book.book_id == current_user.books}
     if current_user.book_requests.where(state: 0).count == current_user.books.count
       @uable_to_request = true
     end

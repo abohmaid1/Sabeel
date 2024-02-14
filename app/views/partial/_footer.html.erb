@@ -11,7 +11,7 @@
         <div class="col-lg-3 col-md-5 col-12 mb-3">
           <h6><%= link_to "سبيل", root_path, class: "custom-link mb-1" %></h6>
           <% if user_signed_in? and !current_user.writer? %>
-            <li><%= link_to "طلب الترقية إلى كاتب", root_path %></li>
+            <li><%= link_to "طلب الترقية إلى كاتب", new_change_user_type_request_path %></li>
           <% end %>
           <% unless current_user %>
             <li><%= link_to "مدير النظام", new_admin_session_path %></li>

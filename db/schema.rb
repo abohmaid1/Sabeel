@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_07_195106) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_13_114129) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_07_195106) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "google_book_picture_tag"
+  end
+
+  create_table "change_user_type_requests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_change_user_type_requests_on_user_id"
   end
 
   create_table "creating_meeting_place_requests", force: :cascade do |t|
@@ -167,6 +174,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_07_195106) do
   add_foreign_key "book_requests", "meeting_places", column: "meeting_place_id_id"
   add_foreign_key "book_requests", "user_have_books", column: "requested_book_id_id"
   add_foreign_key "book_requests", "users", column: "requester_id_id"
+  add_foreign_key "change_user_type_requests", "users"
   add_foreign_key "creating_meeting_place_requests", "supported_governates", column: "governate"
   add_foreign_key "meeting_places", "supported_governates", column: "governate"
   add_foreign_key "request_logs", "books", column: "first_side_book_id"

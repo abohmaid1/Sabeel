@@ -1,0 +1,61 @@
+<%= stylesheet_link_tag "forms"%>
+<style>
+  form{
+    width: 100%;
+  }
+</style>
+<div class="container mt-4 justifay-content-center">
+  <% unless @CUTR == [] %>
+    <table class="table table-hover table-bordered align-middle">
+      <thead class="table-dark text-center">
+        <tr>
+          <th>اسم المستخدم</th>
+          <th>العمر</th>
+          <th>صورة البطاقة</th>
+          <th>قبول</th>
+          <th>الرفض مع إرسال السبب</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <% @CUTR.each do |change_user_type_request| %>
+          <tr>
+            <td><%= change_user_type_request.username %></td>
+            <td><%= ((Time.zone.now - change_user_type_request.birthdate.to_time) / 1.year.seconds).floor  %></td>
+            <td>
+              <%= image_tag(change_user_type_request.card, style: "width: 80%") %>
+              <%# <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contractModal">
+                عرض البطاقة
+              </button> %>
+            </td>
+            <td><%= button_to "قبول",  changeUT_path(change_user_type_request), class: "btn btn-success" %>
+            </td>
+            <td>
+              <%= form_with(model: @change_user_type_request, url: rejectUT_path(change_user_type_request.id), local: true) do |f| %>
+                <div class="d-flex flex-column">
+                  <%= f.text_area :reject_reason, class:"m-4", required: true %>
+                  <%= f.submit "رفض", class: "btn btn-danger"  %>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>لا يوجد طلبات</p>
+  <% end %>
+</div>
+<!-- Modal for pictures -->
+<!-- 
+<%# @CUTR.each do |change_user_type_request| %>
+  <div class="modal fade" id="contractModal" tabindex="-1" role="dialog" aria-labelledby="contractModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <%# image_tag(change_user_type_request.card, style: "width: 100%;") %>
+        </div>
+      </div>
+    </div>
+  </div>
+<%# end %>
+-->

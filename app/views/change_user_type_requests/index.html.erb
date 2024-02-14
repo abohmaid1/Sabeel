@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Change user type requests</h1>
+
+<div id="change_user_type_requests">
+  <% @change_user_type_requests.each do |change_user_type_request| %>
+    <%= render change_user_type_request %>
+    <p>
+      <%= link_to "Show this change user type request", change_user_type_request %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New change user type request", new_change_user_type_request_path %>

@@ -1,4 +1,7 @@
+body{
+  background-color: #9b3c27;
 
+}
 .container{
   min-width: 100%;
 }
@@ -112,4 +115,12 @@ input[type='checkbox']{
   .center-form{
     max-width: 25%;
   }
+}
+
+p{
+  color: black;
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+  filter: drop-shadow(2px 2px gray)
 }

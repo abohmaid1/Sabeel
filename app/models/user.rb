@@ -13,6 +13,7 @@ class User < ApplicationRecord
   belongs_to :supported_governate, foreign_key: :location, class_name: 'SupportedGovernate'
   has_many :books, through: :user_have_books
   has_many :book_requests, foreign_key: :requester_id
+  has_many :change_user_type_requests
 
   enum role: [:special, :reader, :writer]
   

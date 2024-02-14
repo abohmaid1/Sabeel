@@ -1,0 +1,14 @@
+<%= stylesheet_link_tag "account"%>
+<div class="container-fluid">
+  <div class="row justify-content-center align-items-center" style="height: 100vh">
+    <div class="mx-auto center-form col-md-6">
+      <% unless current_user.change_user_type_requests.exists? %>
+        <%= render "form", change_user_type_request: @change_user_type_request %>
+      <% else %>
+        <p>
+          يبدو أن لديك طلب قيد المعاينة، لا يمكنك تقديم سوى طلب في الوقت الواحد
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -34,11 +34,12 @@
       <%= form.hidden_field :requested_book_id_id, value: @owner_book.id %>
       <div class="form-group">
         <%= form.label :meeting_place_id_id, "ملتقيات في منطقتك" %>
-        <%= form.collection_select(:meeting_place_id_id, MeetingPlace.all, :id, :store_name, { include_blank: 'اختر ملتقى' }, required: true ) %>
+        <%= form.collection_select(:meeting_place_id_id, MeetingPlace.where(:governate=> current_user.location), :id, :store_name, { include_blank: 'اختر ملتقى' }, required: true ) %>
       </div>
       <div class="form-group">
         <%= form.label :meeting_time, "موعد اللقاء المقترح" %>
-        <%= form.datetime_field :meeting_time, required: true %>
+        <% minimum_time = (Time.now + 2.hours).strftime('%Y-%m-%dT%H:%M') %>
+        <%= form.datetime_field :meeting_time, required: true, min: minimum_time %>
       </div>
       <div>
         <%= form.submit "ارسل الطلب" %>

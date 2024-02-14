@@ -1,0 +1,101 @@
+<%= stylesheet_link_tag "book-request"%>
+<%= stylesheet_link_tag "containers"%>
+<%= stylesheet_link_tag "library"%>
+<div class="table-container d-flex justify-content-evenly flex-wrap">
+  <% if !@requests.blank? %>
+    <div class="table-responsive rounded ">
+      <div class="top-bar d-flex justify-content-start flex-grow-1 p-4 flex-column">
+        <div class="text-warning">تبادلات قادمة</div>
+        <div class="text-success">تبادلات تبادلات ناجحة</div>
+        <div class="text-danger">تبادلات لم تتم</div>
+      </div>
+      <table class="table text-center align-middle border-black shadow-lg table-bordered table-hover table-striped">
+        <thead class="table-dark text-center">
+          <tr>
+            <th><i class="bi bi-book ps-2"></i>الطرف الأول</th>
+            <th> <i class="bi bi-geo-alt ps-2"></i>الملتقى</th>
+            <th><i class="bi bi-eye ps-2"></i>الطرف الثاني</th>
+          </tr>
+        </thead>
+        <tbody id="book_requests">
+          <% @requests.each do |book_request| %>
+            <% if book_request.meeting_time < Time.now%>
+              <tr id="<%= dom_id book_request %>" class="table-danger">
+              <% else %>
+                <tr id="<%= dom_id book_request %>" class="table-warning">
+                <% end %>
+                <td>
+                  <div class="d-flex flex-xl-row flex-column justify-content-around align-items-center" >
+                    <div class="book read">
+                      <div class="cover d-flex justify-content-center">
+                        <% if !book_request.first_side_book.google_book_picture_tag.blank? %>
+                          <%= image_tag(book_request.first_side_book.google_book_picture_tag) %>
+                        <% else %>
+                          <p >
+                            لا يوجد صورة لعرضها
+                          </p>
+                          <i class="bi bi-emoji-frown-fill"></i>
+                        <% end %>
+                      </div>
+                      <div class="description">
+                        <div class="row">
+                          <p class="title text-center"><%= book_request.first_side_book.title %><br>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">
+                  <h5>المدينة : <%= book_request.meeting_place.city_name %></h5>
+                  <h5>المكان : <%= book_request.meeting_place.store_name %></h5>
+                  <h6>تفاصيل الموقع : <%= book_request.meeting_place.location_details %></h6>
+                  <button class="btn btn-primary" onclick="openGoogleMaps('<%= book_request.meeting_place.city_name %>','<%= book_request.meeting_place.store_name %>')">عرض الموقع في الخرائط (قد يكون خاطئ)</button>
+                  <p>
+                    <%= book_request.meeting_time.to_date %>
+                    <br>
+                    <%= book_request.meeting_time.to_fs(:time) %>
+                  </p>
+                </td>
+                <td>
+                  <div class="d-flex flex-xl-row flex-column justify-content-around align-items-center" >
+                    <div class="book read">
+                      <div class="cover d-flex justify-content-center">
+                        <% if !book_request.second_side_book.google_book_picture_tag.blank? %>
+                          <%= image_tag(book_request.second_side_book.google_book_picture_tag) %>
+                        <% else %>
+                          <p >
+                            لا يوجد صورة لعرضها
+                          </p>
+                          <i class="bi bi-emoji-frown-fill"></i>
+                        <% end %>
+                      </div>
+                      <div class="description">
+                        <div class="row">
+                          <p class="title text-center"><%= book_request.second_side_book.title %><br>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="empty-library">
+        <p class="text-center mt-5">لم تقم بأي تبادل بعد، قم بطلب الكتب من مكتبة التبادل</p>
+        <%= link_to "مكتبة التبادل", exchange_library_path,method: :get ,class: "btn btn-dark btn-lg"%>
+      </div>
+    <% end %>
+  </div>
+  <script>
+    function openGoogleMaps(city_name, storeName) {
+
+      var encodedStoreName  = encodeURIComponent(city_name + " " + storeName);
+      console.log(city_name + storeName);
+        window.open('https://www.google.com/maps/search/?q=' + encodedStoreName, '_blank');
+    }
+  </script>

@@ -24,8 +24,23 @@
           </li>
         <% end %>
         <% unless current_user.books.count == 0 %>
-          <li class="nav-item">
-            <%= link_to "مكتبة التبادل ", exchange_library_path	, class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle click-scroll"
+                                href="#section_3"
+                                id="navbarLightDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">التبادل</a>
+            <ul class="dropdown-menu dropdown-menu-light"
+                                aria-labelledby="navbarLightDropdownMenuLink">
+              <li>
+                <%= link_to "مكتبة التبادل ", exchange_library_path	, class: "dropdown-item" %>
+              </li>
+              <li>
+                <%= link_to "طلبات التبادل المرسلة", book_requests_path, class: "dropdown-item" %>
+              </li>
+              <li>
+                <%= link_to "أرشيف الطلبات المقبولة", requests_archive_path, class: "dropdown-item" %>
+              </li>
+            </ul>
           </li>
         <% end %>
         <li class="nav-item dropdown">
@@ -36,10 +51,7 @@
           <ul class="dropdown-menu dropdown-menu-light"
                                 aria-labelledby="navbarLightDropdownMenuLink">
             <li>
-              <%= link_to "طلبات التبادل المرسلة", book_requests_path, class: "dropdown-item" %>
-            </li>
-            <li>
-              <%= link_to "حسابي", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "بياناتي", edit_user_registration_path, class: "dropdown-item" %>
             </li>
             <li>
               <%= link_to "تسجيل خروج", destroy_user_session_path, class: "dropdown-item" %>

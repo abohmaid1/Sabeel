@@ -1,6 +1,10 @@
 class BookRequestsController < ApplicationController
   before_action :set_book_request, only: %i[ show edit update destroy ]
 
+  def requests_archive
+    @requests = RequestLog.where(:first_side_id => current_user.id).or( RequestLog.where(:second_side_id => current_user.id)).order(meeting_time: :desc)
+  end
+
   def index
     @book_requests = BookRequest.select(
       [
@@ -81,7 +85,11 @@ class BookRequestsController < ApplicationController
     @log_request.meeting_time = @book_request.meeting_time
     @log_request.meeting_place_id = @book_request.meeting_place_id_id
     
-    @book_request.destroy
+    
+
+    puts BookRequest.where(requested_book_id_id: @first_book.id).destroy_all
+    puts BookRequest.where(requested_book_id_id: @second_book.id).destroy_all
+    
     @first_book.destroy
     @second_book.destroy
     @log_request.save
@@ -118,7 +126,6 @@ class BookRequestsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /book_requests/1 or /book_requests/1.json
   def update
     respond_to do |format|
       if @book_request.update(book_request_params)
@@ -131,7 +138,6 @@ class BookRequestsController < ApplicationController
     end
   end
 
-  # DELETE /book_requests/1 or /book_requests/1.json
   def destroy
     @book_request.destroy
 

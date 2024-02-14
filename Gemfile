@@ -54,3 +54,4 @@ gem "httparty", "~> 0.21.0"
 gem "http", "~> 5.1"
 gem "bootstrap", "~> 5.3"
 gem 'whenever', require: false
+gem 'telegram-bot-ruby'

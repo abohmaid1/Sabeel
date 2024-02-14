@@ -14,7 +14,7 @@
         <h2>إنشاء حساب</h2>
         <%= render "users/shared/error_messages", resource: resource %>
         <div class="form-group fullname">
-          <label for="user_username">اسم المستخدم</label>
+          <label for="user_username">الاسم الثلاثي</label>
           <%= f.text_field :username, autofocus: true, placeholder: "اسم المستخدم"%>
         </div>
         <div class="form-group email">
@@ -23,7 +23,8 @@
         </div>
         <div class="form-group date">
           <label for="user_date"> تاريخ الميلاد</label>
-          <%= f.date_field :birthdate, autocomplete: "birthdate" %>
+          <% max_birthdate = 15.years.ago.to_date %>
+          <%= f.date_field :birthdate, autocomplete: "birthdate", max: max_birthdate %>
         </div>
         <div class="form-group city">
           <label for="user_location">المحافظة</label>

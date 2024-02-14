@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @change_user_type_request %>
+
+<div>
+  <%= link_to "Edit this change user type request", edit_change_user_type_request_path(@change_user_type_request) %> |
+  <%= link_to "Back to change user type requests", change_user_type_requests_path %>
+
+  <%= button_to "Destroy this change user type request", @change_user_type_request, method: :delete %>
+</div>
