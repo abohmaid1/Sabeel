@@ -1,6 +1,130 @@
+<%= stylesheet_link_tag "forms"  %>
 <% if meeting_place_signed_in? %>
-  <li><%= link_to "تسجيل الخروج", destroy_meeting_place_session_path %></li>
-  <li><%= link_to "تعديل البيانات", edit_meeting_place_registration_path %></li>
+  <li><%= button_to "تسجيل الخروج", destroy_meeting_place_session_path, method: :delete %></li>
+  <li><%= link_to "تعديل البيانات", edit_meeting_place_password_path %></li>
 <% end %>
-<p><%= @x %></p>
-z
+<div class="container mt-4">
+  <table class="table table-striped table-hover table-bordered align-middle"">
+    <thead class="text-center">
+      <tr>
+        <th>الطرف الأول</th>
+        <th>الوقت</th>
+        <th>الطرف الثاني</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <% @in_location_exchanges.each do |exchange| %>
+        <tr>
+          <td>
+            <%= exchange.first_side_id %> <br>
+            <%= check_box_tag "first_side_presence_#{exchange.id}", exchange.first_side_presence, exchange.first_side_presence, id: "first-side-presence-checkbox-#{exchange.id}",class:"form-check-input" %>
+          </td>
+          <td rowspan="2">
+            <%= exchange.meeting_time.to_date  %>
+            <br>
+            <%= exchange.meeting_time.to_fs(:time)  %>
+          </td>
+          <td>
+            <%= exchange.second_side_id %> <br>
+            <%= check_box_tag "second_side_presence_#{exchange.id}", exchange.second_side_presence, exchange.second_side_presence, id: "second-side-presence-checkbox-#{exchange.id}",class:"form-check-input"  %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="d-flex flex-xl-row flex-column justify-content-around align-items-center" >
+              <div>
+                <div class="cover d-flex justify-content-center">
+                  <% if !exchange.first_side_book.google_book_picture_tag.blank? %>
+                    <%= image_tag(exchange.first_side_book.google_book_picture_tag) %>
+                  <% else %>
+                    <p >
+                      لا يوجد صورة لعرضها
+                    </p>
+                    <i class="bi bi-emoji-frown-fill"></i>
+                  <% end %>
+                </div>
+                <div class="description">
+                  <div class="row">
+                    <p class="title text-center"><%= exchange.first_side_book.title %><br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex flex-xl-row flex-column justify-content-around align-items-center" >
+              <div>
+                <div class="cover d-flex justify-content-center">
+                  <% if !exchange.second_side_book.google_book_picture_tag.blank? %>
+                    <%= image_tag(exchange.second_side_book.google_book_picture_tag) %>
+                  <% else %>
+                    <p >
+                      لا يوجد صورة لعرضها
+                    </p>
+                    <i class="bi bi-emoji-frown-fill"></i>
+                  <% end %>
+                </div>
+                <div class="description">
+                  <div class="row">
+                    <p class="title text-center"><%= exchange.second_side_book.title %><br>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  var checkboxesFirstSide = document.querySelectorAll('[id^="first-side-presence-checkbox-"]');
+  var checkboxesSecondSide = document.querySelectorAll('[id^="second-side-presence-checkbox-"]');
+
+  checkboxesFirstSide.forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+      var isChecked = this.checked;
+      var exchangeId = this.id.split('-').pop();
+      var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+      // Send AJAX request to update server
+      var xhr = new XMLHttpRequest();
+      xhr.open('PATCH', 'presence/updateFirstSide', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          console.log('Checkbox updated successfully');
+        } else {
+          console.error('Error updating checkbox');
+        }
+      };
+      xhr.send(JSON.stringify({ id: exchangeId, isChecked: isChecked }));
+    });
+  });
+  checkboxesSecondSide.forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+      var isChecked = this.checked;
+      var exchangeId = this.id.split('-').pop();
+      var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+      // Send AJAX request to update server
+      var xhr = new XMLHttpRequest();
+      xhr.open('PATCH', 'presence/updateSecondSide', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('X-CSRF-Token', csrfToken);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          console.log('Checkbox updated successfully');
+        } else {
+          console.error('Error updating checkbox');
+        }
+      };
+      xhr.send(JSON.stringify({ id: exchangeId, isChecked: isChecked }));
+    });
+  });
+  });
+</script>

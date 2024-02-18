@@ -2,9 +2,10 @@
 
 class Admins::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+    @disable_nav = true
+    super
+  end
 
   # POST /resource/password
   # def create

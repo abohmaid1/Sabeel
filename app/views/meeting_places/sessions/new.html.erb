@@ -1,21 +1,24 @@
-<h2>Log in meeting place</h2>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<%= stylesheet_link_tag "admin-account"%>
+<div class="container-fluid">
+  <div class="row  justify-content-center align-items-center"  style="height: 100vh;">
+    <div class=" mx-auto center-form col-md-6">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <h2>تسجيل دخول مدير ملتقى</h2>
+        <div class="form-group email">
+          <%= f.label :"البريد الإلكتروني" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="form-group password">
+          <%= f.label :"كلمة السر" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "pass" %>
+          <i id="pass-toggle-btn" class="fa-solid fa-eye"></i>
+        </div>
+        <div class="form-group submit-btn">
+          <%= f.submit "تسجيل الدخول" %>
+        </div>
+        <%= render "meeting_places/shared/links" %>
+      <% end %>
     </div>
-  <% end %>
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-<%= render "meeting_places/shared/links" %>
+</div>
+<%= javascript_include_tag('login.js') %>

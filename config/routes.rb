@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   post 'accepted_request', :to => 'book_requests#accept_meeting', :as => "accepted_meeting"
   get 'rejected_request', :to => 'book_requests#reject_meeting', :as => "rejected_meeting"
   get 'requests_archive', :to => 'book_requests#requests_archive', :as => "requests_archive"
-
+  get 'presence/update'
+  
 
 
   resources :books, :except => [:index, :delete] do
@@ -33,8 +34,12 @@ Rails.application.routes.draw do
   #Devise Routes
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    passwords: 'users/passwords',
+    confirmations: 'users/confirmations'
+
   }
+
 
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
@@ -43,7 +48,11 @@ Rails.application.routes.draw do
   devise_scope :meeting_place do
     get '/meeting_places/sign_out' => 'devise/sessions#destroy'
     get '/meeting_places/index' => 'meeting_places#Main'
+    patch '/meeting_places/presence/updateFirstSide', to: 'presence#updateFirstSide'
+    patch '/meeting_places/presence/updateSecondSide', to: 'presence#updateSecondSide'
+
   end
+
   devise_scope :admin do
     get '/admins/sign_out' => 'devise/sessions#destroy'
     get '/admin/dashboard' => 'admin_actions#dashboard'
@@ -60,16 +69,17 @@ Rails.application.routes.draw do
 
     post '/admin/rejectMP/:id', to: 'admin_actions#reject_meeting_request', as: 'rejectMP'
     post '/admin/rejectUT/:id', to: 'admin_actions#reject_user_request', as: 'rejectUT'
-
-
   end
+  # authenticated :meeting_place do
+  #   root to: "home#index"
+  # end
 
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     registrations: 'admins/registrations'
   }
 
-  devise_for :meeting_places, controllers: {
+  devise_for :meeting_place, controllers: {
     sessions: 'meeting_place/sessions'
   }
 end

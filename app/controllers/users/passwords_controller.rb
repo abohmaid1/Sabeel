@@ -2,9 +2,10 @@
 
 class Users::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+    @disable_nav = true
+    super
+  end
 
   # POST /resource/password
   # def create
@@ -16,10 +17,12 @@ class Users::PasswordsController < Devise::PasswordsController
   #   super
   # end
 
-  # PUT /resource/password
-  # def update
-  #   super
-  # end
+  # PUT /resource/password 
+  def update
+    @disable_nav = true
+    
+    super
+  end
 
   # protected
 
