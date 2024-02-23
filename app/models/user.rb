@@ -10,10 +10,14 @@ class User < ApplicationRecord
 
 
   has_many :user_have_books, dependent: :destroy
+  has_many :paragraphs,  dependent: :destroy, foreign_key: 'writer_id'
   belongs_to :supported_governate, foreign_key: :location, class_name: 'SupportedGovernate'
   has_many :books, through: :user_have_books
-  has_many :book_requests, foreign_key: :requester_id
-  has_many :change_user_type_requests
+  has_many :book_requests, dependent: :destroy, foreign_key: :requester_id
+  has_many :change_user_type_requests, dependent: :destroy
+  has_many :followers, foreign_key: :follower_id, dependent: :destroy
+  has_many :followers, foreign_key: :followed_id, dependent: :destroy
+
 
   enum role: [:special, :reader, :writer]
   

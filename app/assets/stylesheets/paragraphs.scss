@@ -1,0 +1,56 @@
+body{
+}
+
+.card {
+  max-width: 40%;
+  background-color: var(--primary-color);
+  min-width: 40%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-footer {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ccc;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: center;
+}
+
+.btn {
+  margin: 5px;
+}
+
+.paragrahs-container{
+  background-image:url(https://static.tumblr.com/maopbtg/E9Bmgtoht/lines.png);
+  background-color: white;
+  width: 40%;
+  padding: 10px;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.25);
+
+}
+@media screen and (max-width: 768px) {
+  .paragrahs-container{
+    width: 90%;
+  }
+  .card{
+    min-width: 60%;
+  }
+
+}

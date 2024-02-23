@@ -2,27 +2,27 @@
 <%= stylesheet_link_tag "containers"%>
 <%= stylesheet_link_tag "search_and_resaults"%>
 <div class="large-th">
-  <div class="container">
-    <% if !@uable_to_request  %>
-      <div class="top-bar">
-        <div data-controller="debounce" class="row">
-          <%= form_with url: search_books_path, method: :post, data: {controller: "debounce", debounce_target: "form"} do |form| %>
-            <%= form.search_field :title_search,style: "width: 100%",  data: {action: "input->debounce#search"} %>
+  <div class="page_container">
+    <% unless @books.blank? %>
+      <% if !@uable_to_request  %>
+        <div class="list">
+          <% @books.each do |exchange_book| %>
+            <%= render "books/exchange_book", book: exchange_book %>
           <% end %>
         </div>
+      <% else %>
+        <div class="empty-library">
+          <p>عذرا لا يمكنك إرسال المزيد من الطلبات، قم بإضافة المزيد من الكتب لمتكتبك أو إلغاء أحد الطلبات السابقة</p>
+          <%= link_to "أضف المزيد من الكتب", library_path ,method: :get ,class: "btn btn-dark btn-lg"%>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="empty-library">
+        <p>مؤسف، لا وجود لأي كتب للتبادل في محافظتك، قم بتغيير محافظتك إن كنت قارئاَ نهما</p>
+        <%= link_to "تعديل بياناتي", edit_user_registration_path ,method: :get ,class: "btn btn-dark btn-lg"%>
       </div>
-      <div class="list">
-        <% @books.each do |exchange_book| %>
-          <%= render "books/exchange_book", book: exchange_book %>
-        <% end %>
-      </div>
-    </div>
-  <% else %>
-    <div class="empty-library">
-      <p>عذرا لا يمكنك إرسال المزيد من الطلبات، قم بإضافة المزيد من الكتب لمتكتبك أو إلغاء أحد الطلبات السابقة</p>
-      <%= link_to "أضف المزيد من الكتب", library_path ,method: :get ,class: "btn btn-dark btn-lg"%>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">

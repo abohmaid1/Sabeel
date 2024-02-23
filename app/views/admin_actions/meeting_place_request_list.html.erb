@@ -43,7 +43,8 @@
       <div class="modal-content">
         <div class="modal-body">
           <%= image_tag(creating_meeting_place_request.contract, style: "width: 100%;") %>
-          <%= button_to "Accept and create Profile",  CreateMP_path(creating_meeting_place_request) %>
+          <%= button_to "قبول الطلب",  CreateMP_path(creating_meeting_place_request), class: "btn btn-success" %>
+          <%= button_to "رفض الطلب",  rejectMP_path(creating_meeting_place_request), class: "btn btn-danger" %>
         </div>
       </div>
     </div>

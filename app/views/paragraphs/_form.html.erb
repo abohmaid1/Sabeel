@@ -1,0 +1,13 @@
+<h2 class="p-4 text-center">أضف فقرة</h2>
+<%= form_with(model: paragraph, class: "form") do |form| %>
+  <div class="form-group">
+    <%= form.text_area :content, class: "form-control", id: "content-input", rows: "5", placeholder: "النص" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :"أدخل نوع الفقرة" %>
+    <%= form.text_area :content_type, class: "form-control", required: true, placeholder: "نوع على الأقل" %>
+  </div>
+  <div class="form-group d-flex justify-content-center">
+    <%= form.submit "أضف", class: "btn btn-success w-50 p-3" %>
+  </div>
+<% end %>

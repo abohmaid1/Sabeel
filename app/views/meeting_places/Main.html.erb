@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "forms"  %>
 <% if meeting_place_signed_in? %>
   <li><%= button_to "تسجيل الخروج", destroy_meeting_place_session_path, method: :delete %></li>
-  <li><%= link_to "تعديل البيانات", edit_meeting_place_password_path %></li>
+  <li><%= link_to "تعديل البيانات", edit_meeting_place_password_path , class: "btn btn-primary"%></li>
 <% end %>
 <div class="container mt-4">
   <table class="table table-striped table-hover table-bordered align-middle"">

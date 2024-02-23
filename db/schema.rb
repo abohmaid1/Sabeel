@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_13_114129) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_23_193041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +94,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_13_114129) do
     t.index ["governate"], name: "index_creating_meeting_place_requests_on_governate"
   end
 
+  create_table "followers", force: :cascade do |t|
+    t.bigint "followed_id", null: false
+    t.bigint "follower_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_followers_on_followed_id"
+    t.index ["follower_id"], name: "index_followers_on_follower_id"
+  end
+
   create_table "meeting_places", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -111,6 +120,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_13_114129) do
     t.index ["email"], name: "index_meeting_places_on_email", unique: true
     t.index ["governate"], name: "index_meeting_places_on_governate"
     t.index ["reset_password_token"], name: "index_meeting_places_on_reset_password_token", unique: true
+  end
+
+  create_table "paragraphs", force: :cascade do |t|
+    t.bigint "writer_id", null: false
+    t.text "content"
+    t.text "content_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["writer_id"], name: "index_paragraphs_on_writer_id"
   end
 
   create_table "request_logs", force: :cascade do |t|
@@ -176,7 +194,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_13_114129) do
   add_foreign_key "book_requests", "users", column: "requester_id_id"
   add_foreign_key "change_user_type_requests", "users"
   add_foreign_key "creating_meeting_place_requests", "supported_governates", column: "governate"
+  add_foreign_key "followers", "users", column: "followed_id"
+  add_foreign_key "followers", "users", column: "follower_id"
   add_foreign_key "meeting_places", "supported_governates", column: "governate"
+  add_foreign_key "paragraphs", "users", column: "writer_id"
   add_foreign_key "request_logs", "books", column: "first_side_book_id"
   add_foreign_key "request_logs", "books", column: "second_side_book_id"
   add_foreign_key "request_logs", "meeting_places"

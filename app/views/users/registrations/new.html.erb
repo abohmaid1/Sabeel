@@ -28,7 +28,7 @@
         </div>
         <div class="form-group city">
           <label for="user_location">المحافظة</label>
-          <%= f.collection_select(:location, SupportedGovernate.all, :id, :name) %>
+          <%= f.collection_select(:location, SupportedGovernate.all, :id, :name, { include_blank: 'اختر محافظة' }) %>
         </div>
         <div class="form-group password">
           <label for="user_password">كلمة المرور</label>

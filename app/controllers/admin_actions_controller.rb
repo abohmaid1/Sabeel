@@ -58,6 +58,8 @@ class AdminActionsController < ApplicationController
     end
 
     def reject_meeting_request
+        @Meeting_place_request = CreatingMeetingPlaceRequest.find(params[:id]).destroy
+        ProfileActionMailer.SendMeetingPlaceData(@Profile).deliver_now
     end
     #--------------------------
     

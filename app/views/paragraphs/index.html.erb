@@ -1,0 +1,21 @@
+<%= stylesheet_link_tag "containers" %>
+<%= stylesheet_link_tag "paragraphs" %>
+<div class="page_container flex-md-row justify-content-md-evenly align-items-md-start align-items-lg-start min-vh-100">
+  <div class="p-2 row justify-content-center">
+    <%= render "form", paragraph: @paragraph %>
+  </div>
+  <div id="paragraphs" class=" paragrahs-container ">
+    <h2 class="text-center" style="padding: 4px; padding-bottom: 35px">صفحتي</h2>
+    <% unless @paragraphs == [] %>
+      <% @paragraphs.each do |paragraph| %>
+        <%= render paragraph %>
+      <% end %>
+    <% else %>
+      <div class="align-self-center">
+        <p>
+          لم تقم بإضافة أي فقرات، أرنا إبداعك !
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

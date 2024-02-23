@@ -129,9 +129,10 @@
   }
 
   .footer-container{
-    position: static;
+    position: relative;
     bottom: 0;
     left: 0;
+    min-width: 100%;
   }
 
   path{

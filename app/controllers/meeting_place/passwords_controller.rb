@@ -17,9 +17,9 @@ class MeetingPlace::PasswordsController < Devise::PasswordsController
   # end
 
   # PUT /resource/password
-  # def update
-  #   super
-  # end
+  def update
+    super
+  end
 
   # protected
 

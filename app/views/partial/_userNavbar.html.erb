@@ -20,9 +20,24 @@
         </li>
         <% if current_user.writer? %>
           <li class="nav-item">
-            <%= link_to "صفحتي", library_path, class: "nav-link" %>
+            <%= link_to "صفحتي", paragraphs_path, class: "nav-link" %>
           </li>
         <% end %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle click-scroll"
+                                href="#section_3"
+                                id="navbarLightDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">الفقرات</a>
+          <ul class="dropdown-menu dropdown-menu-light"
+                                aria-labelledby="navbarLightDropdownMenuLink">
+            <li class="nav-item">
+              <%= link_to "كل الكتّاب", writers_paragraphs_path, class: "dropdown-item" %>
+            </li>
+            <li>
+              <%= link_to "الكتّاب المٌتابَعون", followed_writers_paragraphs_path, class: "dropdown-item" %>
+            </li>
+          </ul>
+        </li>
         <% unless current_user.books.count == 0 %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle click-scroll"

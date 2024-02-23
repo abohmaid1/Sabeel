@@ -1,0 +1,13 @@
+<div class="d-flex flex-row aling-items-center  justify-content-between">
+  <div style="diplay: inline; padding-bottom: 24px;  max-width: 70%; ">
+    <div>
+      <p style="margin: 8px"><strong>نوع الفقرة</strong>: <%= paragraph.content_type %>.</p>
+    </div>
+    <div style="display: inline-block; line-height: 40px;">
+      <p><%= paragraph.content %>.</p>
+    </div>
+  </div>
+  <div class="d-flex flex-column aling-items-center justify-content-center">
+    <%= link_to "حذف الفقرة", @paragraph, method: :delete, class: "btn btn-danger btn-sm", :form_class => "d-flex aling-items-center justify-content-center" %>
+  </div>
+</div>

@@ -26,18 +26,23 @@ class BooksController < ApplicationController
       user_have_books.user_id,
       user_have_books.book_id,
       books.title,
-      books.google_book_picture_tag
+      books.google_book_picture_tag,
+      users.location
       FROM
       user_have_books
       JOIN
-      books ON user_have_books.book_id = books.id"
+      users ON user_have_books.user_id = users.id
+      JOIN
+      books ON user_have_books.book_id = books.id
+      where user_have_books.user_id != #{current_user.id}
+      and user_have_books.book_id NOT IN (#{current_user.books.ids.join(',')})
+      and users.location = (#{current_user.location})
+      "
     )
     @books.each do |book|
       puts book.id
     end
-
-    @books = @books.reject { |book| book.user_id == current_user.id }
-    @books = @books.reject { |book| book.book_id == current_user.books}
+    puts "-----------------------"
     if current_user.book_requests.where(state: 0).count == current_user.books.count
       @uable_to_request = true
     end

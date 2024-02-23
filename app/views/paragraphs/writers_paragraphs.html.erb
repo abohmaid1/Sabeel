@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag "containers" %>
+<%= stylesheet_link_tag "paragraphs" %>
+<div class="page_container flex-column justify-content-start min-vh-100">
+  <% @paragraphs.each do |paragraph|   %>
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+          <%= paragraph.username %>
+        </div>
+        <div>
+          <% unless paragraph.followed != 0 %>
+            <%= button_to "متابعة", follow_path(paragraph.writer_id), class: "btn btn-primary btn-sm" %>
+          <% else %>
+            <%= button_to "إلغاء متابعة", unfollow_path(paragraph.followed), class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="card-body ">
+        <%= paragraph.content %>
+      </div>
+      <div class="card-footer ">
+        <%= paragraph.content_type %>
+      </div>
+    </div>
+  <% end %>
+</div>

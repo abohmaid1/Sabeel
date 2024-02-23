@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  
+  resources :paragraphs
   resources :change_user_type_requests
   resources :book_requests
   
@@ -6,6 +8,15 @@ Rails.application.routes.draw do
   
   root 'main#index'
   get 'main/abouts_us'
+
+  #writes
+  post '/follow/:id', :to => 'paragraphs#follow' , as: "follow"
+  post '/unfollow/:id', :to => 'paragraphs#unfollow', as: "unfollow"
+
+
+  #paragraphs
+  get 'writers_paragraphs', :to => 'paragraphs#writers_paragraphs'
+  get 'followed_writers_paragraphs', :to => 'paragraphs#followed_writers_paragraphs'
 
   #error routes
   match "/404", to: "errors#page_not_found", via: :all
